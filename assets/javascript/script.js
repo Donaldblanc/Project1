@@ -1,0 +1,1 @@
+alert("The Java script is linked")
