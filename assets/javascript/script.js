@@ -63,7 +63,9 @@ function getQuery (search){
       .then(function (response) {
         console.log("****THE Vanilla WAY IS THE BEST WAY ;) !!!****");
         console.log(response);
-        console.log(response.data.results[0].name)
+        console.log(response.data.results[0].name);
+        console.log(response.data.results[0].id);
+        console.log(response.data.results[0].description);
 
       });
 
