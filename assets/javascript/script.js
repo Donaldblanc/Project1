@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  var movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fantastic Four (1994)", "Blade",
+  const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fantastic Four (1994)", "Blade",
     "X-Men",
     "Blade II",
     "Spider-Man",
@@ -73,10 +73,8 @@ $(document).ready(function () {
   }//displayMovieInfo
 
   function createButton(response) {
-
     var movieDiv = $("<div class='movie'>");
     var a = $("<button id = 'movie_id'>");
-
     a.addClass("movie-btn");
     a.attr("data-name", response.imdbID);
     a.text(response.Title);
@@ -106,7 +104,6 @@ $(document).ready(function () {
 
   // using event bubbling to provide a single listener
   document.querySelector('.container').addEventListener("click", function (e) {
-
     console.log(e)
     console.log(e.srcElement);
 
@@ -118,11 +115,9 @@ $(document).ready(function () {
       console.log("passed ID " + e.srcElement.dataset.name);
       character_array(movie_id);
     }// movie-btn lisenter
-
   });// container listener
 
   function character_array(movieID) {
-
     var movie_ID = movieID
     // console.log(movie_ID);
     var queryURL2 = "https://api.themoviedb.org/3/movie/" + movie_ID + "/credits?api_key=cf7b01cd6ffa681f8ced55fe3eac526f";
