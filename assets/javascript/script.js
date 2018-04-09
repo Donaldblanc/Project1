@@ -83,7 +83,7 @@ function getQuery(search) {
 
       printToPage(response);
 
-    }); kl;
+    });
 
 }//getQuery
 
@@ -114,7 +114,7 @@ function printToPage(response) {
   var imageUrl = response.data.results[0].thumbnail.path + "." + response.data.results[0].thumbnail.extension;
   var heroID = response.data.results[0].id;
   var description = response.data.results[0].description
-  var comicDiv = $("<div class='item'>");
+  var comicDiv = $("<div class='character'>");
   var h3 = $("<h3>").text("Title: " + title);
   var p = $("<p>").text("Description: " + description);
 
