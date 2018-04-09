@@ -1,0 +1,39 @@
+the Jquery way to make Ajax calls 
+
+var queryURL = "http://gateway.marvel.com/v1/public/comics?ts=1&apikey=0c59a3c44e014ddc1ffcdf3ff74fc90f&hash=a6c84b3cc66e3a92494635469be8bd74";
+
+ $.ajax({
+           url: queryURL,
+           method: "GET"
+        }).then(function(response) {
+                console.log(response);
+         });
+
+
+ Kevins way to resolve the cors erros
+
+ var queryURL = "http://gateway.marvel.com/v1/public/comics?ts=1&apikey=0c59a3c44e014ddc1ffcdf3ff74fc90f&hash=a6c84b3cc66e3a92494635469be8bd74";
+
+ $.ajax({
+  url: queryURL,
+   method: "GET"
+ }).then(function(response) {
+   console.log(response);
+ });
+
+
+  
+  //************** THIS GETS A CORS ERROR  but the Donald way to make ajax calls 
+  fetch(queryURL).then( function(respose){
+      return(respose.json()); 
+  }).then(function (response){
+      console.log("****THE VANILLA WAY****");
+      console.log(response);
+
+  }).catch (function(response) {
+      console.log("***** This failed *****")
+      console.log(response);
+  });
+
+
+
