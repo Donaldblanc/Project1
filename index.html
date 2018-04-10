@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>W3.CSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--style.css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <h1>MARVEL COMICS</h1>
+    </header>
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 5</div>
+            <img src="assets/images/captainamerica.jpg" style="width:100%" height="600px">
+            <div class="text">Sldier1</div>
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 5</div>
+            <img src="assets/images/hulk.jpg" style="width:100%" height="600px">
+            <div class="text">Slider2</div>
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 5</div>
+            <img src="assets/images/ironman.jpg" style="width:100%" height="600px">
+            <div class="text">Sldier3</div>
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">4 / 5</div>
+            <img src="assets/images/spiderman.jpg" style="width:100%" height="600px">
+            <div class="text">Sldier4</div>
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">5 / 5</div>
+            <img src="assets/images/wolverine.jpg" style="width:100%" height="600px">
+            <div class="text">Sldier5</div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <br>
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+    <script>
+        var slideIndex = 0;
+        showSlides();
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 2000);
+        }
+        
+    <div class="btmspace-80 center">
+      <h2 class="nospace">Lorem IPSUM</h2>
+      <p class="nospace">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+    </div>
+    
+        <article class="bgded overlay" style="background-image:url('assets/images/captainamerica.jpg');">
+          <div class="txtwrap"><i class="block fa fa-4x fa-camera"></i>
+            <h6 class="heading">Movie Name</h6>
+            <p>Some text here&hellip;</p>
+          </div>
+          <footer><a href="#">More &raquo;</a></footer>
+        </article>
+     
+      <li class="one_third">
+        <article class="bgded overlay" style="background-image:url('assets/images/hulk.jpg');">
+          <div class="txtwrap"><i class="block fa fa-4x fa-camera"></i>
+            <h6 class="heading">Movie Name</h6>
+            <p>Some text here&hellip;</p>
+          </div>
+          <footer><a href="#">More &raquo;</a></footer>
+        </article>
+      </li>
+
+      <li class="one_third active">
+        <article class="bgded overlay" style="background-image:url('images/spiderman.jpg');">
+          <div class="txtwrap"><i class="block fa fa-4x fa-camera"></i>
+            <h6 class="heading">Movie Name</h6>
+            <p>Some text here&hellip;</p>
+          </div>
+          <footer><a href="#">More &raquo;</a></footer>
+        </article>
+      </li>
+
+      <li class="one_third first">
+        <article class="bgded overlay" style="background-image:url('images/ironman.jpg');">
+          <div class="txtwrap"><i class="block fa fa-4x fa-camera"></i>
+            <h6 class="heading">Movie Name</h6>
+            <p>Some text here&hellip;</p>
+          </div>
+          <footer><a href="#">More &raquo;</a></footer>
+        </article>
+      </li>
+
+      <li class="one_third active">
+        <article class="bgded overlay" style="background-image:url('images/wolverine.jpg');">
+          <div class="txtwrap"><i class="block fa fa-4x fa-camera"></i>
+            <h6 class="heading">Movie Name</h6>
+            <p>Some text here&hellip;</p>
+          </div>
+          <footer><a href="#">More &raquo;</a></footer>
+        </article>
+      </li>
+
+      <li class="one_third">
+        <article class="bgded overlay" style="background-image:url('images/captainamerica.jpg');">
+          <div class="txtwrap"><i class="block fa fa-4x fa-camera"></i>
+            <h6 class="heading">Movie Name</h6>
+            <p>Some text here&hellip;</p>
+          </div>
+          <footer><a href="#">More &raquo;</a></footer>
+        </article>
+      </li>
+      <div class="clear"></div>
+ 
+
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear"> 
+    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Iman, Jose, Donald</a></p>
+    
+  </div>
+</div>
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+
+    </script>
+    <script src="assets/javascript/script.js" type="text/javascript"></script>
+</body>
+
+</html>
