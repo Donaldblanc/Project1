@@ -129,11 +129,21 @@ const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fan
         return (response.json());
       }).then(function (response) {
         console.log("****THE VANILLA WAY****");
-        // console.log(response);
+        console.log(response);
+        
+        //split the item into separate strings if it is separated by a speacial character
         for (i = 0; i < 10; i++) {
-          char_array.push(response.cast[i]);
+          if (response.cast[i].character.includes('/')){
+            var special_char = '/';
+            var characters_split;
+            characters_split= response.cast[i].character.split(special_char); //store the split array
+            for(var j = 0;j<characters_split.length; j++){
+              char_array.push(characters_split[j]);  //push each item of the array into the char_array
+            }
+          }
+          console.log(char_array);
         }
-        console.log(char_array);
+        // console.log(char_array);
       }).catch(function (response) {
         console.log("***** This failed *****")
         console.log(response);
