@@ -130,18 +130,27 @@ const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fan
       }).then(function (response) {
         console.log("****THE VANILLA WAY****");
         console.log(response);
+        var special_char;
         
         //split the item into separate strings if it is separated by a speacial character
         for (i = 0; i < 10; i++) {
           if (response.cast[i].character.includes('/')){
-            var special_char = '/';
+            special_char = '/';
             var characters_split;
             characters_split= response.cast[i].character.split(special_char); //store the split array
             for(var j = 0;j<characters_split.length; j++){
               char_array.push(characters_split[j]);  //push each item of the array into the char_array
             }
+          }else if( response.cast[i].character.includes('(')){//find string that contains "("
+            special_char = '(';
+            characters_split= response.cast[i].character.split(special_char); //split string into array
+            console.log(characters_split);
+            char_array.push(characters_split[0]);//only grab first string of array, the first string is always the name of character in movie
+          }else{
+            char_array.push(response.cast[i].character);
           }
           console.log(char_array);
+          console.log("Array of first 10 characters in movie :"+ char_array);
         }
         // console.log(char_array);
       }).catch(function (response) {
