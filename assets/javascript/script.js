@@ -1,6 +1,6 @@
 
 // Jose's CODE 
-const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fantastic Four (1994)", "Blade",
+const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fantastic Four", "Blade",
   "X-Men",
   "Blade II",
   "Spider-Man",
@@ -14,7 +14,7 @@ const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fan
   "X-Men: The Last Stand",
   "Ghost Rider",
   "Spider-Man 3",
-  "Fantastic Four: Rise of the Silver Surfer",
+  "Rise of the Silver Surfer",
   "Iron Man",
   "The Incredible Hulk",
   "Punisher: War Zone",
@@ -68,8 +68,8 @@ function displayMovieInfo() {
       console.log(response);
     });
 
-    localStorage.setItem("movie" + i, movies[i]);
-    localStorage.setItem("movies", JSON.stringify(movies));
+    // localStorage.setItem("movie" + i, movies[i]);
+    // localStorage.setItem("movies", JSON.stringify(movies));
   }
 
 }//displayMovieInfo
@@ -90,6 +90,10 @@ function createButton(response) {
 
   var plot = response.Plot;
   var pThree = $("<p>").text("Plot: " + plot);
+
+  var imgURL = response.Poster; //retrieve poster
+  var image = $("<img>").attr("src", imgURL);
+
 
   movieDiv.append(pThree);
 
@@ -116,6 +120,7 @@ document.querySelector('.container').addEventListener("click", function (e) {
     // console.log("Class Name :" + e.srcElement.className);
     let movie_id = e.srcElement.dataset.name;
     // console.log("passed ID " + e.srcElement.dataset.name);
+    char_array = [];
     character_array(movie_id);
   }// movie-btn lisenter
 });// container listener
@@ -126,74 +131,90 @@ function character_array(movieID) {
   var queryURL2 = "https://api.themoviedb.org/3/movie/" + movie_ID + "/credits?api_key=cf7b01cd6ffa681f8ced55fe3eac526f";
   // console.log(queryURL2);
 
-  fetch(queryURL2).then(function (response) {
-    return (response.json());
-  }).then(function (response) {
-    // console.log("****THE VANILLA WAY****");
-    console.log(response);
+  fetch(queryURL2).then(function (response_imdb) {
+    return (response_imdb.json());
+  }).then(function (response_imdb) {
+
+    console.log(response_imdb);
     var special_char;
-    // var temp_character;
+    gen_character(response_imdb);
 
-    //split the item into separate strings if it is separated by a speacial character
-    for (i = 0; i <= 10; i++) {//this for loop will create a first original array with name of characters 
-      if (response.cast[i].character.includes('/')) {
-        special_char = '/';
-        var characters_split;
-        characters_split = response.cast[i].character.split(special_char); //store the split array
-        for (var j = 0; j < characters_split.length; j++) {
-          //push each item of the array into the char_array
-          if (characters_split[j].includes('(')) {//find string that contains "("
-            special_char = '(';
-            characters_split = characters_split[j].split(special_char); //split string into array
-            // console.log(characters_split);
-            char_array.push(characters_split[0]);//only grab first string of array, the first string is always the name of character in movie
-          } else {
-            char_array.push(characters_split[j]);
-          }
-        }
-
-
-      } else if (response.cast[i].character.includes('(')) {//find string that contains "("
-        special_char = '(';
-        characters_split = response.cast[i].character.split(special_char); //split string into array
-        // console.log(characters_split);
-        char_array.push(characters_split[0]);//only grab first string of array, the first string is always the name of character in movie
-      }
-      else {
-        char_array.push(response.cast[i].character);
-      }
-
-      // console.log(char_array);
-      // console.log("Array of first 10 characters in movie :"+ char_array);
-    }
-    console.log(char_array);
-  }).catch(function (response) {
+  }).catch(function (response_imdb) {
     console.log("***** This failed *****")
-    console.log(response);
+    console.log(response_imdb);
   });
-  console.log("Character array: " + char_array);
-  setTimeout(gen_character, 500);
-
 }//character Array 
 
-function gen_character() {
+
+
+function gen_character(response_imdb) {
 
   // ------------------IGNORE FOR NOW -----------------------//
 
-  for (var k = 0; k < char_array.length; k++) {
-    if (char_array[k].includes('') || char_array[k].includes('-') || char_array[k].includes('The')) {
-     
-      var temp_character = [char_array[k]];
-      console.log(temp_character);
-      var temp_char = temp_character.join('-');
-      console.log(temp_char);
-      // char_array.push(temp_char);
-      // temp_char =temp_character.join('');
-      // char_array.push(temp_char);
-    } else {
-      return (char_array);
+  for (i = 0; i <= 10; i++) {//this for loop will create a first original array with name of characters 
+    if (response_imdb.cast[i].character.includes('/')) {
+      special_char = '/';
+      var characters_split;
+      characters_split = response_imdb.cast[i].character.split(special_char); //store the split array
+      for (var j = 0; j < characters_split.length; j++) {
+        //push each item of the array into the char_array
+        if (characters_split[j].includes('(')) {//find string that contains "("
+          special_char = '(';
+          characters_split = characters_split[j].split(special_char); //split string into array
+          // console.log(characters_split);
+          char_array.push(characters_split[0]);//only grab first string of array, the first string is always the name of character in movie
+        } else {
+          char_array.push(characters_split[j]);
+        }
+      }
+    } else if (response_imdb.cast[i].character.includes('(')) {//find string that contains "("
+      special_char = '(';
+      characters_split = response_imdb.cast[i].character.split(special_char); //split string into array
+      // console.log(characters_split);
+      char_array.push(characters_split[0]);//only grab first string of array, the first string is always the name of character in movie
+    }
+    else {
+      char_array.push(response_imdb.cast[i].character);
     }
   }
+
+  var characters_array = char_array;
+  console.log("Current array :" + char_array);
+  console.log("length of Current array :" + char_array.length);
+  console.log("New array :"+characters_array);
+  console.log("length of New array :"+characters_array.length);
+
+  for (var k = 0; k < char_array.length; k++) {
+
+    var temp_character = characters_array[k];
+    console.log("Before trim :" + temp_character);
+    temp_character = temp_character.replace(/^\s+|\s+$/gm, '');
+    console.log("After trim :" + temp_character);
+    characters_array.splice(k, 1, temp_character);
+    console.log("Array without unnecessary spaces :" + characters_array);
+    var temp_character_1 = temp_character.replace(/\s+/g, '');//removes all spaces and pushes to array
+    console.log("Name without spaces :" + temp_character_1);
+    // characters_array.splice(k, 0, temp_character_1);
+    var temp_character_2 = temp_character.replace(/\s+/g, '-');//replaces spaces for slash and pushes to array
+    console.log("Name with slash :" + temp_character_2);
+    // character_array.push(temp_character_2);
+    // var temp_character_3 = temp_character.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');//replaces spaces for slash and pushes to array .....infinite loop being created
+    // console.log("Name without slash :"+temp_character_3);
+    // char_array.push(temp_character_3);
+    if (temp_character.indexOf('The') > -1) {
+      var temp_character_3 = temp_character.split('The')
+      temp_character_3 = temp_character_3.replace(/^\s+|\s+$/gm, '');
+      console.log("Name without 'The' :" +temp_character_3[1]);
+      // char_array.push(temp_character_3[1]);
+    } else {
+      temp_character_3 =  temp_character;
+    }
+  }
+  console.log("Final array 1 length :" + char_array.length);
+  console.log("Final array 2 length :" + characters_array.length);
+
+
+
 
   // ------------------IGNORE FOR NOW -----------------------//
 }
