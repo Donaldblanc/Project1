@@ -253,6 +253,29 @@ tr, #comments li, #comments input[type="submit"], #comments input[type="reset"]{
 tr:nth-child(even), #comments li:nth-child(even){color:inherit; background-color:#F7F7F7;}
 table a, #comments a{background-color:inherit;}
 
+#infinite-comiclist {
+	/* We need to limit the height and show a scrollbar */
+	width: 200px;
+	height: 300px;
+	overflow: auto;
+	font-size: 50px;
+	background-color: red;
+	/* Optional, only to check that it works with margin/padding */
+	margin: 30px;
+	padding: 20px;
+	border: 10px solid black;
+  }
+  
+  /* Optional eye candy below: */
+  li {
+	padding: 10px;
+	list-style-type: none;
+  }
+  li:hover {
+	background: #ccc;
+  }
+  
+
 /* Media Queries*/
 @-ms-viewport{width:device-width;}
 
