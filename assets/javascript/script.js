@@ -99,7 +99,7 @@ const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fan
   
       // ------------------For Youtube --------------------------//
   
-      $(".container").prepend(movieDiv);
+      $(".container").append(movieDiv);
     }//createButton
   
     displayMovieInfo();
