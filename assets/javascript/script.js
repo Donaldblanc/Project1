@@ -129,15 +129,26 @@ const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fan
         return (response.json());
       }).then(function (response) {
         console.log("****THE VANILLA WAY****");
-        // console.log(response);
+         console.log(response);
         for (i = 0; i < 10; i++) {
-          char_array.push(response.cast[i]);
+          console.log(response.cast[i].character)
+          char_array.push(response.cast[i].character);
         }
-        console.log(char_array);
+        console.log("The Array :" + Object.keys(char_array));
+        console.log(char_array[0]);
+        console.log("Encoding :" + encodeURIComponent(char_array[0]));
+        console.log("Removing special Characters" + char_array[0].replace(/[^a-zA-Z ]/g, "") )
+         var split = char_array[0].split("/");
+         console.log("The Value of split :" +  split[1]);
+         console.log(char_array[0].substr(char_array[0].indexOf("/") + 1));
+
+
       }).catch(function (response) {
         console.log("***** This failed *****")
         console.log(response);
       });
+
+      
     }//character Array 
   
 
@@ -227,11 +238,17 @@ function getQuery(search) {
       // console.log(response.data.results[0].description);
       // console.log(response.data.results[0].thumbnail);
       // console.log(response.data.results[0].thumbnail.path + "."  + response.data.results[0].thumbnail.extension);
+      console.log(response.data.results.length)
 
-      charId = response.data.results[0].id;
-
-      printToPage(response);
-      return response;
+      if(response.data.results.length > 0){
+        charId = response.data.results[0].id;
+            printToPage(response);
+            console.log("We found a character");
+      }else{
+        alert("Sorry no results for this character");
+      }
+            
+   
     });
 
 }//getQuery
