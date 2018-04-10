@@ -55,8 +55,8 @@ function displayMovieInfo() {
     var movie = movies[i];
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
 
-    var video_search = movies[i];
-    var queryURL1 = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + video_search + "trailer&key=AIzaSyC8th4wDxjLmTn1fONnkSMaUaGAGTUNQRA"
+    // var video_search = movies[i];
+    // var queryURL1 = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + video_search + "trailer&key=AIzaSyC8th4wDxjLmTn1fONnkSMaUaGAGTUNQRA"
 
     fetch(queryURL).then(function (response) {
       return (response.json());
@@ -70,17 +70,17 @@ function displayMovieInfo() {
       console.log(response);
     });
 
-    fetch(queryURL1).then(function (response_youtube) {
-      return (response_youtube.json());
-    }).then(function (response_youtube) {
-      console.log("****THE VANILLA WAY****");
-      console.log(response_youtube);
-      // createVideo(response_youtube);
+    // fetch(queryURL1).then(function (response_youtube) {
+    //   return (response_youtube.json());
+    // }).then(function (response_youtube) {
+    //   console.log("****THE VANILLA WAY****");
+    //   console.log(response_youtube);
+    //   // createVideo(response_youtube);
 
-    }).catch(function (response_youtube) {
-      console.log("***** This failed *****")
-      console.log(response_youtube);
-    });
+    // }).catch(function (response_youtube) {
+    //   console.log("***** This failed *****")
+    //   console.log(response_youtube);
+    // });
   }
 }//displayMovieInfo
 
