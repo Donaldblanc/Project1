@@ -111,7 +111,7 @@ function createButton(response) {
 
   movieDiv.append(pThree);
 
-  $(".container").prepend(movieDiv);
+  $(".container").append(movieDiv);
 
 }//createButton
 
