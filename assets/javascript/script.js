@@ -161,7 +161,6 @@ function createButton(response) {
 
 }//createButton
 
-
 displayMovieInfo();
 
 // using event bubbling to provide a single listener
@@ -178,6 +177,23 @@ document.querySelector('.container').addEventListener("click", function (e) {
     char_array = [];
     character_array(movie_id);
   }// movie-btn lisenter
+
+  
+  
+  if (e.srcElement.className == "char-btn") {
+    console.log("Character Clicked");
+     console.log("Button ID :" + e.srcElement.id);
+     console.log("CharId :" + e.srcElement.dataset.name);
+     console.log("Class Name :" + e.srcElement.className);
+    
+     console.log("passed ID " + e.srcElement.dataset.name);
+    
+  }// movie-btn lisenter
+
+
+
+
+
 });// container listener
 
 function character_array(movieID) {
@@ -396,6 +412,7 @@ function printToPage(response) {
   var imageUrl = response.data.results[0].thumbnail.path + "." + response.data.results[0].thumbnail.extension;
   var heroID = response.data.results[0].id;
   var description = response.data.results[0].description
+
   var comicDiv = $("<div class='character'>");
   var h3 = $("<h3>").text("Title: " + title);
   var p = $("<p>").text("Description: " + description);
@@ -408,7 +425,49 @@ function printToPage(response) {
   comicDiv.append(charImage);
   comicDiv.append(p);
 
-  $("#characters").append(comicDiv);
+ // $("#characters").append(comicDiv);
+
+
+ var li = document.createElement('li');
+  li.setAttribute('class','one_third  char-btn') ;        
+
+     li.setAttribute("data-name", heroID);
+ var article = document.createElement("article");
+     article.setAttribute('class', "bgded overlay");
+     article.style.backgroundImage = "url("+  imageUrl + ")";
+ var div = document.createElement ("div")
+     div.setAttribute('class', "txtwrap");
+
+  var h6 = document.createElement('h6');
+      h6.innerHTML = title;
+ var  p = document.createElement('p');
+      p.innerHTML = description;
+ var footer = document.createElement("footer");
+
+ var more = document.createElement('a');
+    // more.setAttribute('href', '');
+     more.setAttribute('class', "char-btn")
+     more.setAttribute("data-name", heroID)
+     more.innerHTML = "More &raquo;";
+
+
+   div.appendChild(h6);
+   div.appendChild(p);
+   footer.appendChild(more);
+   article.appendChild(div);
+   article.appendChild(footer);
+   li.appendChild(article);
+   
+   document.querySelector('#infinite-charlist').appendChild(li);
+
+
+
+
+
+
+
+
+  
 
 }//printToPage
 
