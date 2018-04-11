@@ -125,11 +125,8 @@ function createButton(response) {
   
   
    (firstMov == 0 ) ? li.setAttribute('class','one_third first movie-btn')  :
-   (firstMov == 3 ) ?  (li.setAttribute('class','one_third first movie-btn') , firstMov = 0) : li.setAttribute('class','one_third  movie-btn')
-              
-  firstMov++
-
-
+   (firstMov == 3 ) ?  (li.setAttribute('class','one_third first movie-btn') , firstMov = 0) : li.setAttribute('class','one_third  movie-btn') ;        
+   firstMov++
 
       li.setAttribute("data-name", response.imdbID);
   var article = document.createElement("article");
@@ -147,7 +144,9 @@ function createButton(response) {
   var footer = document.createElement("footer");
 
   var more = document.createElement('a');
-      more.setAttribute('href', '#');
+     // more.setAttribute('href', '');
+      more.setAttribute('class', "movie-btn")
+      more.setAttribute("data-name", response.imdbID)
       more.innerHTML = "More &raquo;";
 
     div.appendChild(iElm)
