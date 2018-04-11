@@ -1,156 +1,276 @@
 
 // Jose's CODE 
-const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fantastic Four (1994)", "Blade",
-    "X-Men",
-    "Blade II",
-    "Spider-Man",
-    "Daredevil",
-    "Hulk",
-    "Spider-Man 2",
-    "Blade: Trinity",
-    "Elektra",
-    "Man-Thing",
-    "Fantastic Four",
-    "X-Men: The Last Stand",
-    "Ghost Rider",
-    "Spider-Man 3",
-    "Fantastic Four: Rise of the Silver Surfer",
-    "Iron Man",
-    "The Incredible Hulk",
-    "Punisher: War Zone",
-    "X-Men Origins",
-    "Iron Man 2",
-    "Thor",
-    "X-Men: First Class",
-    "Captain America: The First Avenger",
-    "Ghost Rider: Spirit of Vengeance",
-    "Avengers",
-    "The Amazing Spider-Man",
-    "Iron Man 3",
-    "The Wolverine",
-    "Thor: The Dark World",
-    "Captain America: The Winter Soldier",
-    "The Amazing Spider-Man 2",
-    "X-Men: Days of Future Past",
-    "Guardians of the Galaxy",
-    "Big Hero 6",
-    "Avengers: Age of Ultron",
-    "Ant-Man",
-    "Deadpool",
-    "Captain America: Civil War",
-    "X-Men: Apocalypse",
-    "Doctor Strange",
-    "Logan",
-    "Guardians of the Galaxy Vol. 2",
-    "Spider-Man: Homecoming",
-    "Thor: Ragnarok",
-    "Black Panther"];
+const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fantastic Four", "Blade",
+  "X-Men",
+  "Blade II",
+  "Spider-Man",
+  "Daredevil",
+  "Hulk",
+  "Spider-Man 2",
+  "Blade: Trinity",
+  "Elektra",
+  "Man-Thing",
+  "Fantastic Four",
+  "X-Men: The Last Stand",
+  "Ghost Rider",
+  "Spider-Man 3",
+  "Rise of the Silver Surfer",
+  "Iron Man",
+  "The Incredible Hulk",
+  "Punisher: War Zone",
+  "X-Men Origins",
+  "Iron Man 2",
+  "Thor",
+  "X-Men: First Class",
+  "Captain America: The First Avenger",
+  "Ghost Rider: Spirit of Vengeance",
+  "Avengers",
+  "The Amazing Spider-Man",
+  "Iron Man 3",
+  "The Wolverine",
+  "Thor: The Dark World",
+  "Captain America: The Winter Soldier",
+  "The Amazing Spider-Man 2",
+  "X-Men: Days of Future Past",
+  "Guardians of the Galaxy",
+  "Big Hero 6",
+  "Avengers: Age of Ultron",
+  "Ant-Man",
+  "Deadpool",
+  "Captain America: Civil War",
+  "X-Men: Apocalypse",
+  "Doctor Strange",
+  "Logan",
+  "Guardians of the Galaxy Vol. 2",
+  "Spider-Man: Homecoming",
+  "Thor: Ragnarok",
+  "Black Panther"];
+
+var char_array = [];
+
+var movNum = 0
 
 
-    function displayMovieInfo() {
+function displayMovieInfo() {
 
-      for (var i = 0; i < movies.length; i++) {
-  
-        var movie = movies[i];
-        var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
-        // var queryURL1 = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=CaptainAmericatrailer&key=AIzaSyC8th4wDxjLmTn1fONnkSMaUaGAGTUNQRA"
-  
-        fetch(queryURL).then(function (response) {
-          return (response.json());
-        }).then(function (response) {
-          console.log("****THE VANILLA WAY****");
-          // console.log(response);
-          createButton(response);
-  
-        }).catch(function (response) {
-          console.log("***** This failed *****")
-          console.log(response);
-        });
-  
-        localStorage.setItem("movie" + i, movies[i]);
-        localStorage.setItem("movies", JSON.stringify(movies));
-      }
-  
-    }//displayMovieInfo
+  if (movNum == movies.length) return;
+
+  var end = movNum + 7;
+
+  // if the end growth lager than the movie array reset it the value of the length
+  if (end>movies.length) end = movies.length;
+
+  for (var i = movNum; i < end; i++) {
+
+    var movie = movies[i];
+    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
 
 
-    function createButton(response) {
-      var movieDiv = $("<div class='movie'>");
-      var a = $("<button id = 'movie_id'>");
-      a.addClass("movie-btn");
-      a.attr("data-name", response.imdbID);
-      a.text(response.Title);
-      movieDiv.append(a)
-  
-      var released = response.Released;
-      var pTwo = $("<p>").text("Released: " + released);
-  
-      movieDiv.append(pTwo);
-  
-      var plot = response.Plot;
-      var pThree = $("<p>").text("Plot: " + plot);
-  
-      movieDiv.append(pThree);
-  
-      // ------------------For Youtube --------------------------//
-  
-      var play = $(' <div class="youtube-player" data-id="VIDEO_ID"></div>');
-      movieDiv.append(play);
-  
-      // ------------------For Youtube --------------------------//
-  
-      $(".container").prepend(movieDiv);
-    }//createButton
-  
+    fetch(queryURL).then(function (response) {
+      return (response.json());
+    }).then(function (response) {
+      console.log("****THE VANILLA WAY****");
+      // console.log(response);
+      createButton(response);
+
+    }).catch(function (response) {
+      console.log("***** This failed *****")
+      console.log(response);
+    });
+  }
+  movNum = end;
+}//displayMovieInfo
+
+var movElm = document.querySelector('#theMovie-list');
+
+// Detect when scrolled to bottom.
+movElm.addEventListener('scroll', function () {
+  if (movElm.scrollTop + movElm.clientHeight >= movElm.scrollHeight) {
     displayMovieInfo();
+  }
+});
+
+var firstMov = 0
+function createButton(response) {
+  //console.log(response.Poster);
+  var movieDiv = $("<div class='movie'>");
+  var a = $("<button id = 'movie_id'>");
+  a.addClass("movie-btn");
+  a.attr("data-name", response.imdbID);
+  a.text(response.Title);
+  movieDiv.append(a)
+
+  var released = response.Released;
+  var pTwo = $("<p>").text("Released: " + released);
+  movieDiv.append(pTwo);
+  var plot = response.Plot;
+  var pThree = $("<p>").text("Plot: " + plot);
+
+  var imgURL = response.Poster; //retrieve poster
+  var image = $("<img>").attr("src", imgURL);
+
+  var play = $(' <div id="player">');
+  // play.attr("data-id", response_youtube.items[0].id.videoId);
+  movieDiv.append(play);
+
+  movieDiv.append(pThree);
+
+ // $("#theMovie-list").append(movieDiv);
+  var movieTitle = response.Title
+ 
+
+  var li = document.createElement('li');
+
+ // (firstMov == 0 )  ? li.setAttribute('class','one_third first movie-btn') :  (firstMov == 3 ) li.setAttribute('class','one_third first movie-btn'), firstMov = 0 :  li.setAttribute('class','one_third  movie-btn');
   
-    // using event bubbling to provide a single listener
-    document.querySelector('.container').addEventListener("click", function (e) {
-      console.log(e)
-      console.log(e.srcElement);
   
-      if (e.srcElement.className == "movie-btn") {
-        console.log("Button ID :" + e.srcElement.id);
-        console.log("Movie Id :" + e.srcElement.dataset.name);
-        console.log("Class Name :" + e.srcElement.className);
-        let movie_id = e.srcElement.dataset.name;
-        console.log("passed ID " + e.srcElement.dataset.name);
-        character_array(movie_id);
-      }// movie-btn lisenter
-    });// container listener
-  
-    function character_array(movieID) {
-      var movie_ID = movieID
-      // console.log(movie_ID);
-      var queryURL2 = "https://api.themoviedb.org/3/movie/" + movie_ID + "/credits?api_key=cf7b01cd6ffa681f8ced55fe3eac526f";
-      console.log(queryURL2);
-      var char_array = [];
-      fetch(queryURL2).then(function (response) {
-        return (response.json());
-      }).then(function (response) {
-        console.log("****THE VANILLA WAY****");
-         console.log(response);
-        for (i = 0; i < 10; i++) {
-          console.log(response.cast[i].character)
-          char_array.push(response.cast[i].character);
+   (firstMov == 0 ) ? li.setAttribute('class','one_third first movie-btn')  :
+   (firstMov == 3 ) ?  (li.setAttribute('class','one_third first movie-btn') , firstMov = 0) : li.setAttribute('class','one_third  movie-btn') ;        
+   firstMov++
+
+      li.setAttribute("data-name", response.imdbID);
+  var article = document.createElement("article");
+      article.setAttribute('class', "bgded overlay");
+      article.style.backgroundImage = "url("+  imgURL + ")";
+  var div = document.createElement ("div")
+      div.setAttribute('class', "txtwrap");
+
+   var iElm = document.createElement("i"); 
+       iElm.setAttribute('class', "block fa fa-4x fa-camera");
+   var h6 = document.createElement('h6');
+       h6.innerHTML = movieTitle;
+  var  p = document.createElement('p');
+       p.innerHTML = plot;
+  var footer = document.createElement("footer");
+
+  var more = document.createElement('a');
+     // more.setAttribute('href', '');
+      more.setAttribute('class', "movie-btn")
+      more.setAttribute("data-name", response.imdbID)
+      more.innerHTML = "More &raquo;";
+
+    div.appendChild(iElm)
+    div.appendChild(h6);
+    div.appendChild(p);
+    footer.appendChild(more);
+    article.appendChild(div);
+    article.appendChild(footer);
+    li.appendChild(article);
+    
+    document.querySelector('#theMovie-list').appendChild(li);
+
+}//createButton
+
+
+displayMovieInfo();
+
+// using event bubbling to provide a single listener
+document.querySelector('.container').addEventListener("click", function (e) {
+   console.log(e)
+  // console.log(e.srcElement);
+
+  if (e.srcElement.className == "movie-btn") {
+    // console.log("Button ID :" + e.srcElement.id);
+    // console.log("Movie Id :" + e.srcElement.dataset.name);
+    // console.log("Class Name :" + e.srcElement.className);
+    let movie_id = e.srcElement.dataset.name;
+    // console.log("passed ID " + e.srcElement.dataset.name);
+    char_array = [];
+    character_array(movie_id);
+  }// movie-btn lisenter
+});// container listener
+
+function character_array(movieID) {
+  var movie_ID = movieID
+  // console.log(movie_ID);
+  var queryURL2 = "https://api.themoviedb.org/3/movie/" + movie_ID + "/credits?api_key=cf7b01cd6ffa681f8ced55fe3eac526f";
+  // console.log(queryURL2);
+
+  fetch(queryURL2).then(function (response_imdb) {
+    return (response_imdb.json());
+  }).then(function (response_imdb) {
+
+    console.log(response_imdb);
+    var special_char;
+    gen_character(response_imdb);
+
+  }).catch(function (response_imdb) {
+    console.log("***** This failed *****")
+    console.log(response_imdb);
+  });
+}//character Array 
+
+
+
+function gen_character(response_imdb) {
+
+  for (i = 0; i <= 10; i++) {//this for loop will create a first original array with name of characters 
+    if (response_imdb.cast[i].character.includes('/')) {
+      special_char = '/';
+      var characters_split;
+      characters_split = response_imdb.cast[i].character.split(special_char); //store the split array
+      for (var j = 0; j < characters_split.length; j++) {
+        //push each item of the array into the char_array
+        if (characters_split[j].includes('(')) {//find string that contains "("
+          special_char = '(';
+          characters_split = characters_split[j].split(special_char); //split string into array
+          // console.log(characters_split);
+          char_array.push(characters_split[0]);//only grab first string of array, the first string is always the name of character in movie
+        } else {
+          char_array.push(characters_split[j]);
         }
-        console.log("The Array :" + Object.keys(char_array));
-        console.log(char_array[0]);
-        console.log("Encoding :" + encodeURIComponent(char_array[0]));
-        console.log("Removing special Characters" + char_array[0].replace(/[^a-zA-Z ]/g, "") )
-         var split = char_array[0].split("/");
-         console.log("The Value of split :" +  split[1]);
-         console.log(char_array[0].substr(char_array[0].indexOf("/") + 1));
+      }
+    } else if (response_imdb.cast[i].character.includes('(')) {//find string that contains "("
+      special_char = '(';
+      characters_split = response_imdb.cast[i].character.split(special_char); //split string into array
+      // console.log(characters_split);
+      char_array.push(characters_split[0]);//only grab first string of array, the first string is always the name of character in movie
+    }
+    else {
+      char_array.push(response_imdb.cast[i].character);
+    }
+  }
+  localStorage.setItem("Characters", JSON.stringify(char_array));
+  var characters_array = char_array.slice();
+  // console.log("Current array :" + char_array);
+  // console.log("length of Current array :" + char_array.length);
+  // console.log("New array :" + characters_array);
+  // console.log("length of New array :" + characters_array.length);
 
+  for (var k = 0; k < char_array.length; k++) {
+    var length = char_array.length + 1;
+    // console.log(char_array.length);
+    // console.log(k);
+    var temp_character = characters_array[k];
+    // console.log("Before trim :" + temp_character);
+    temp_character = temp_character.replace(/^\s+|\s+$/gm, '');
+    // console.log("After trim :" + temp_character);
+    characters_array.splice(length, 1, temp_character);
+    // console.log("Array without unnecessary spaces :" + characters_array);
+    var temp_character_1 = temp_character.replace(/\s+/g, '');//removes all spaces and pushes to array
+    // console.log("Name without spaces :" + temp_character_1);
+    characters_array.splice(length, 0, temp_character_1);
+    var temp_character_2 = temp_character.replace(/\s+/g, '-');//replaces spaces for slash and pushes to array
+    // console.log("Name with slash :" + temp_character_2);
+    characters_array.splice(length, 0, temp_character_2);
+    var temp_character_4 = temp_character.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');//replaces spaces for slash and pushes to array .....infinite loop being created
+    // console.log("Name without slash :" + temp_character_4);
+    characters_array.splice(length, 0, temp_character_4);
+    if (temp_character.indexOf('The') > -1) {
+      var temp_character_3 = temp_character.split('The')
+      temp_character_3 = temp_character_3.replace(/^\s+|\s+$/gm, '');
+      // console.log("Name without 'The' :" + temp_character_3[1]);
+      characters_array.push(temp_character_3[1]);
+    } else {
+      temp_character_3 = temp_character;
+    }
+  }
+  localStorage.setItem("Characters", JSON.stringify(characters_array));
+  // console.log("Final array 1 length :" + char_array.length);
+  // console.log("Final array 2 length :" + characters_array.length);
+  // console.log("Final array :" + characters_array);
+}
 
-      }).catch(function (response) {
-        console.log("***** This failed *****")
-        console.log(response);
-      });
-
-      
-    }//character Array 
-  
 
 
 
@@ -255,14 +375,14 @@ function getQuery(search) {
 
 
 function getComics(charId) {
-// need to set a boolean here for if a user has chosen a new character.
-//  let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
+  // need to set a boolean here for if a user has chosen a new character.
+  //  let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
   let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
   console.log("The comics fired");
   console.log(charId);
   console.log(newURL);
   loadMore(charId);
-    
+
 
   //https://gateway.marvel.com:443/v1/public/characters/1009624/comics?limit=100&apikey=0c59a3c44e014ddc1ffcdf3ff74fc90f
 
@@ -305,11 +425,12 @@ var listElm = document.querySelector('#infinite-comiclist');
 // Add 20 items.
 var nextItem = 0;
 //var loadMore = function () 
-function loadMore(char){
+
+function loadMore(char) {
 
   let charId = "1009610";
 
-  let newURL = marvURL + "characters/" + charId + "/comics?limit=10&offset=" +nextItem + apiAuth;
+  let newURL = marvURL + "characters/" + charId + "/comics?limit=10&offset=" + nextItem + apiAuth;
   const kevsServer = "https://mighty-river-19291.herokuapp.com/cors";
   var data = {
     url: newURL,
@@ -328,26 +449,25 @@ function loadMore(char){
     .then(function (response) {
       console.log("****THE Load more function****");
       console.log(response);
-   // console.log(Object.keys(response).length);
-    console.log(response.data.results.length);
-     // console.log(response.data.results[0].title);
+      // console.log(Object.keys(response).length);
+      console.log(response.data.results.length);
+      // console.log(response.data.results[0].title);
 
       // debuggin lines printing title to console.
-      for (var i = 0; i < response.data.results.length ; i++) {
+      for (var i = 0; i < response.data.results.length; i++) {
         console.log(response.data.results[i].title);
       }
-      
-      for (var i = 0; i < response.data.results.length ; i++) {
-         var item = document.createElement('li');
-         item.innerText = 'Title ' + response.data.results[i].title;
-         listElm.appendChild(item);
-         console.log("Comic Image: " +response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension);
-       }
 
-       nextItem += 11;
-       console.log("The Value of nextItem :" +  nextItem );    
+      for (var i = 0; i < response.data.results.length; i++) {
+        var item = document.createElement('li');
+        item.innerText = 'Title ' + response.data.results[i].title;
+        listElm.appendChild(item);
+        console.log("Comic Image: " + response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension);
+      }
+      nextItem += 11;
+      console.log("The Value of nextItem :" + nextItem);
     });
-    
+
 }
 
 // Detect when scrolled to bottom.

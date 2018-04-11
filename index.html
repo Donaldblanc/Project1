@@ -1,21 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script src="assets/javascript/script.js" async></script>
-    <title>Marvel Movies and comics</title>
-</head>
-<body>
-    <p>Marvel Project 1</p>
-    
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ipsum deserunt illo perferendis praesentium at voluptates velit a, cupiditate quod quas consectetur iste magni reiciendis neque. Esse porro blanditiis dolore?</p>
+<html>
 
-    
+<head>
+  <title>Marvel Comics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="assets/javascript/script.js" async></script>
+  <link href="assets/css/layout.css" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body id="top">
+  <!-- Top Background Image Wrapper -->
+  <div class="bgded overlay" style="background-image:url('assets/images/background.jpg');">
+    <div class="wrapper row1">
+      <header id="header" class="hoc clear">
+        <div id="logo" class="fl_left">
+          <h1>
+            <a href="index.html">Marvel Comics</a>
+          </h1>
+        </div>
+      </header>
+    </div>
+    <div id="pageintro" class="hoc clear">
+      <div class="flexslider basicslider">
+        <ul class="slides">
+          <li>
+            <article>
+              <h3 class="heading">Captain America</h3>
+              <footer>
+                <a class="btn" href="#">SEE THE COMIC</a>
+              </footer>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h3 class="heading">HULK</h3>
+              <footer>
+                <a class="btn inverse" href="#">SEE THE COMIC</a>
+              </footer>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h3 class="heading">SPIDERMAN</h3>
+              <footer>
+                <a class="btn" href="#">SEE THE COMIC</a>
+              </footer>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End Top Background Image Wrapper -->
+  <div class="wrapper row3">
+    <main class="hoc container clear">
+      <!-- main body -->
+      <div class="btmspace-80 center">
+        <h3 class="nospace">Lorem IPSUM</h3>
+        <p class="nospace">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+          dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+          specimen book. </p>
+      </div>
+      <!-- <ul class="nospace group services">
+        <li class="one_third first active">
+          <article class="bgded overlay" style="background-image:url('assets/images/captainamerica.jpg');">
+            <div class="txtwrap">
+              <i class="block fa fa-4x fa-camera"></i>
+              <h6 class="heading">Movie Name</h6>
+              <p>Some text here&hellip;</p>
+            </div>
+            <footer>
+              <a href="#">More &raquo;</a>
+            </footer>
+          </article>
+        </li>
+        <li class="one_third">
+          <article class="bgded overlay" style="background-image:url('assets/images/hulk.jpg');">
+            <div class="txtwrap">
+              <i class="block fa fa-4x fa-camera"></i>
+              <h6 class="heading">Movie Name</h6>
+              <p>Some text here&hellip;</p>
+            </div>
+            <footer>
+              <a href="#">More &raquo;</a>
+            </footer>
+          </article>
+        </li>
+        <li class="one_third ">
+          <article class="bgded overlay" style="background-image:url('assets/images/spiderman.jpg');">
+            <div class="txtwrap">
+              <i class="block fa fa-4x fa-camera"></i>
+              <h6 class="heading">Movie Name</h6>
+              <p>Some text here&hellip;</p>
+            </div>
+            <footer>
+              <a href="#">More &raquo;</a>
+            </footer>
+          </article>
+        </li>
+        <li class="one_third first">
+          <article class="bgded overlay" style="background-image:url('assets/images/ironman.jpg');">
+            <div class="txtwrap">
+              <i class="block fa fa-4x fa-camera"></i>
+              <h6 class="heading">Movie Name</h6>
+              <p>Some text here&hellip;</p>
+            </div>
+            <footer>
+              <a href="#">More &raquo;</a>
+            </footer>
+          </article>
+        </li>
+        <li class="one_third ">
+          <article class="bgded overlay" style="background-image:url('assets/images/wolverine.jpg');">
+            <div class="txtwrap">
+              <i class="block fa fa-4x fa-camera"></i>
+              <h6 class="heading">Movie Name</h6>
+              <p>Some text here&hellip;</p>
+            </div>
+            <footer>
+              <a href="#">More &raquo;</a>
+            </footer>
+          </article>
+        </li>
+        <li class="one_third">
+          <article class="bgded overlay" style="background-image:url('assets/images/captainamerica.jpg');">
+            <div class="txtwrap">
+              <i class="block fa fa-4x fa-camera"></i>
+              <h6 class="heading">Movie Name</h6>
+              <p>Some text here&hellip;</p>
+            </div>
+              
+            <footer>
+              <a href="#">More &raquo;</a>
+            </footer>
+          </article>
+        </li>
+      </ul>
+      / main body -->
+      <div class="clear"></div>
+
+      <div id= "theMovies">
+        <ul id="theMovie-list" class = "nospace group services"></ul>
+      </div>
+
+      <div id= "commics">
+        <ul id="infinite-comiclist"></ul>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="wrapper row5">
+    <div id="copyright" class="hoc clear">
+      <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved -
+        <a href="#">Donald Blanc Iman Eltayeb Jose Viteri</a>
+      </p>
+
+    </div>
+  </div>
+  <a id="backtotop" href="#top">
+    <i class="fa fa-chevron-up"></i>
+  </a>
+
+
+
+
+<br>
+<hr>
 <div class="form-group">
     <label for="char-name">Hero Name:</label>
     <input id="char-name" type="text" class="form-control" >
@@ -31,15 +183,14 @@
   <hr>
   <div id = "characters"> </div>
 
-  
-
-  <div id="comics">
-    <ul id='infinite-comiclist'></ul>
-  </div>
  
 
- <hr>
-<div class = "container"></div>
-  
+ 
+ 
+  <!-- JAVASCRIPTS -->
+  <script src="assets/javascript/jquery.min.js"></script>
+  <script src="assets/javascript/jquery.backtotop.js"></script>
+  <script src="assets/javascript/jquery.mobilemenu.js"></script>
+  <script src="assets/javascript/jquery.flexslider-min.js"></script>
 </body>
 </html>
