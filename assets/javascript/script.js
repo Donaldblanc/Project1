@@ -48,15 +48,23 @@ const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fan
 
 var char_array = [];
 
+var movNum = 0
+
+
 function displayMovieInfo() {
 
-  for (var i = 0; i < movies.length; i++) {
+  if (movNum == movies.length) return;
+
+  var end = movNum + 7;
+
+  // if the end growth lager than the movie array reset it the value of the length
+  if (end>movies.length) end = movies.length;
+
+  for (var i = movNum; i < end; i++) {
 
     var movie = movies[i];
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
 
-    // var video_search = movies[i];
-    // var queryURL1 = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + video_search + "trailer&key=AIzaSyC8th4wDxjLmTn1fONnkSMaUaGAGTUNQRA"
 
     fetch(queryURL).then(function (response) {
       return (response.json());
@@ -69,23 +77,20 @@ function displayMovieInfo() {
       console.log("***** This failed *****")
       console.log(response);
     });
-
-    // fetch(queryURL1).then(function (response_youtube) {
-    //   return (response_youtube.json());
-    // }).then(function (response_youtube) {
-    //   console.log("****THE VANILLA WAY****");
-    //   console.log(response_youtube);
-    //   // createVideo(response_youtube);
-
-    // }).catch(function (response_youtube) {
-    //   console.log("***** This failed *****")
-    //   console.log(response_youtube);
-    // });
   }
+  movNum = end;
 }//displayMovieInfo
 
+var movElm = document.querySelector('#theMovie-list');
 
-function createButton(response) { 
+// Detect when scrolled to bottom.
+movElm.addEventListener('scroll', function () {
+  if (movElm.scrollTop + movElm.clientHeight >= movElm.scrollHeight) {
+    displayMovieInfo();
+  }
+});
+
+function createButton(response) {
   // console.log(response_youtube);
   var movieDiv = $("<div class='movie'>");
   var a = $("<button id = 'movie_id'>");
@@ -111,54 +116,10 @@ function createButton(response) {
 
   movieDiv.append(pThree);
 
-  $(".container").append(movieDiv);
+  $("#theMovie-list").append(movieDiv);
 
 }//createButton
 
-// function createVideo(response_youtube) {
-//   console.log("creater frame")
-//   var tag = document.createElement('script');
-
-//   tag.src = "https://www.youtube.com/iframe_api";
-//   var firstScriptTag = document.getElementsByTagName('script')[0];
-//   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-//   // 3. This function creates an <iframe> (and YouTube player)
-//   //    after the API code downloads.
-//   var player;
-//   function onYouTubeIframeAPIReady() {
-//     player = new YT.Player('player', {
-//       height: '390',
-//       width: '640',
-//       videoId: 'M7lc1UVf-VE',
-//       events: {
-//         'onReady': onPlayerReady,
-//         'onStateChange': onPlayerStateChange
-//       }
-//     });
-//   }
-
-//   // 4. The API will call this function when the video player is ready.
-//   function onPlayerReady(event) {
-//     event.target.playVideo();
-//   }
-
-//   // 5. The API calls this function when the player's state changes.
-//   //    The function indicates that when playing a video (state=1),
-//   //    the player should play for six seconds and then stop.
-//   var done = false;
-//   function onPlayerStateChange(event) {
-//     if (event.data == YT.PlayerState.PLAYING && !done) {
-//       setTimeout(stopVideo, 6000);
-//       done = true;
-//     }
-//   }
-//   function stopVideo() {
-//     player.stopVideo();
-//   }
-//   // var play = $(' <div class="youtube-player" data-id="VIDEO_ID"></div>');
-//   // movieDiv.append(play);
-// }
 
 displayMovieInfo();
 
@@ -417,6 +378,7 @@ var listElm = document.querySelector('#infinite-comiclist');
 // Add 20 items.
 var nextItem = 0;
 //var loadMore = function () 
+
 function loadMore(char) {
 
   let charId = "1009610";
@@ -455,7 +417,6 @@ function loadMore(char) {
         listElm.appendChild(item);
         console.log("Comic Image: " + response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension);
       }
-
       nextItem += 11;
       console.log("The Value of nextItem :" + nextItem);
     });
