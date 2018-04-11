@@ -161,7 +161,6 @@ function createButton(response) {
 
 }//createButton
 
-
 displayMovieInfo();
 
 // using event bubbling to provide a single listener
