@@ -256,7 +256,7 @@ table a, #comments a{background-color:inherit;}
 #infinite-comiclist {
 	/* We need to limit the height and show a scrollbar */
 	width: 1000px;
-	height: 300px;
+	height: 500px;
 	overflow: auto;
 	/* Optional, only to check that it works with margin/padding */
 	margin: 30px;

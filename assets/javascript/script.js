@@ -285,6 +285,8 @@ function gen_character(response_imdb) {
   // console.log("Final array 1 length :" + char_array.length);
   // console.log("Final array 2 length :" + characters_array.length);
   // console.log("Final array :" + characters_array);
+
+  getCharacters(characters_array) 
 }
 
 
@@ -323,9 +325,16 @@ var getTheId = function (idname) {
 // builds the 
 function getCharacters(name) {
 
-  console.log(name);
-  var newURL = marvURL + charSearch + name + apiAuth;
-  getQuery(newURL);
+  console.log("The Value of GetCharacters " + name[0]);
+  console.log("length " + name.length);
+  for(var i =0; i < name.length; i ++)
+  {
+    var newURL = marvURL + charSearch + name[i] + apiAuth;
+    console.log("Testing character :" + name[i]);
+    getQuery(newURL);
+    
+  }
+ 
 }
 
 var searchButton = getTheId("#run-search");
@@ -334,7 +343,9 @@ searchButton.onclick = function (event) {
   //var charName2 = document.getElementById("char-name").value;
   var charName = getTheId("#char-name").value.trim();
   if (charName) {
+
     getCharacters(charName);
+
   } else {
     alert("you have to enter a character");
   }
@@ -381,7 +392,7 @@ function getQuery(search) {
             printToPage(response);
             console.log("We found a character");
       }else{
-        alert("Sorry no results for this character");
+        console.log("Sorry no results for this character");
       }
             
    
@@ -469,12 +480,6 @@ function printToPage(response) {
 
 
 
-
-
-
-
-  
-
 }//printToPage
 
 
@@ -489,7 +494,7 @@ function loadMore(char) {
 
   let charId = "1009610";
 
-  let newURL = marvURL + "characters/" + charId + "/comics?limit=10&offset=" + nextItem + apiAuth;
+  let newURL = marvURL + "characters/" + charId + "/comics?limit=6&offset=" + nextItem + apiAuth;
   const kevsServer = "https://mighty-river-19291.herokuapp.com/cors";
   var data = {
     url: newURL,
@@ -516,19 +521,59 @@ function loadMore(char) {
       for (var i = 0; i < response.data.results.length; i++) {
         console.log(response.data.results[i].title);
       }
-
+var firstCom = 0;
       for (var i = 0; i < response.data.results.length; i++) {
         var item = document.createElement('li');
+        var cTitle =  response.data.results[i].title;
+        var cImg = response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension;
+        var cId = response.data.results[i].id;
+        var Cdescription = response.data.results[i].description
         item.innerText = 'Title ' + response.data.results[i].title;
-        listElm.appendChild(item);
+       // listElm.appendChild(item);
         console.log("Comic Image: " + response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension);
+
+        var li = document.createElement('li');
+        (firstCom == 0 ) ? li.setAttribute('class','one_third first movie-btn')  :
+        (firstCom == 3 ) ?  (li.setAttribute('class','one_third first movie-btn') , firstCom = 0) : li.setAttribute('class','one_third  movie-btn') ;        
+        firstCom++
+      
+        //li.setAttribute('class','one_third  comic-btn') ;        
+      
+           li.setAttribute("data-name", cId);
+       var article = document.createElement("article");
+           article.setAttribute('class', "bgded ");
+           article.style.backgroundImage = "url("+  cImg + ")";
+       var div = document.createElement ("div")
+           div.setAttribute('class', "txtwrap");
+      
+        var h6 = document.createElement('h6');
+            h6.innerHTML = cTitle;
+       var  p = document.createElement('p');
+            p.innerHTML = "";
+       var footer = document.createElement("footer");
+      
+       var more = document.createElement('a');
+          // more.setAttribute('href', '');
+           more.setAttribute('class', "comic-btn")
+           more.setAttribute("data-name", cId)
+           more.innerHTML = "More &raquo;";
+      
+      
+         div.appendChild(h6);
+         div.appendChild(p);
+         footer.appendChild(more);
+         article.appendChild(div);
+         article.appendChild(footer);
+         li.appendChild(article);
+         
+         document.querySelector('#infinite-comiclist').appendChild(li);
+
+
       }
-      nextItem += 11;
+      nextItem += 7;
       console.log("The Value of nextItem :" + nextItem);
     });
-
 }
-
 // Detect when scrolled to bottom.
 listElm.addEventListener('scroll', function () {
   if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
