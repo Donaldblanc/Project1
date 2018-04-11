@@ -90,8 +90,9 @@ movElm.addEventListener('scroll', function () {
   }
 });
 
+var firstMov = 0
 function createButton(response) {
-  // console.log(response_youtube);
+  //console.log(response.Poster);
   var movieDiv = $("<div class='movie'>");
   var a = $("<button id = 'movie_id'>");
   a.addClass("movie-btn");
@@ -101,9 +102,7 @@ function createButton(response) {
 
   var released = response.Released;
   var pTwo = $("<p>").text("Released: " + released);
-
   movieDiv.append(pTwo);
-
   var plot = response.Plot;
   var pThree = $("<p>").text("Plot: " + plot);
 
@@ -116,7 +115,50 @@ function createButton(response) {
 
   movieDiv.append(pThree);
 
-  $("#theMovie-list").append(movieDiv);
+ // $("#theMovie-list").append(movieDiv);
+  var movieTitle = response.Title
+ 
+
+  var li = document.createElement('li');
+
+ // (firstMov == 0 )  ? li.setAttribute('class','one_third first movie-btn') :  (firstMov == 3 ) li.setAttribute('class','one_third first movie-btn'), firstMov = 0 :  li.setAttribute('class','one_third  movie-btn');
+  
+  
+   (firstMov == 0 ) ? li.setAttribute('class','one_third first movie-btn')  :
+   (firstMov == 3 ) ?  (li.setAttribute('class','one_third first movie-btn') , firstMov = 0) : li.setAttribute('class','one_third  movie-btn')
+              
+  firstMov++
+
+
+
+      li.setAttribute("data-name", response.imdbID);
+  var article = document.createElement("article");
+      article.setAttribute('class', "bgded overlay");
+      article.style.backgroundImage = "url("+  imgURL + ")";
+  var div = document.createElement ("div")
+      div.setAttribute('class', "txtwrap");
+
+   var iElm = document.createElement("i"); 
+       iElm.setAttribute('class', "block fa fa-4x fa-camera");
+   var h6 = document.createElement('h6');
+       h6.innerHTML = movieTitle;
+  var  p = document.createElement('p');
+       p.innerHTML = plot;
+  var footer = document.createElement("footer");
+
+  var more = document.createElement('a');
+      more.setAttribute('href', '#');
+      more.innerHTML = "More &raquo;";
+
+    div.appendChild(iElm)
+    div.appendChild(h6);
+    div.appendChild(p);
+    footer.appendChild(more);
+    article.appendChild(div);
+    article.appendChild(footer);
+    li.appendChild(article);
+    
+    document.querySelector('#theMovie-list').appendChild(li);
 
 }//createButton
 
@@ -125,7 +167,7 @@ displayMovieInfo();
 
 // using event bubbling to provide a single listener
 document.querySelector('.container').addEventListener("click", function (e) {
-  // console.log(e)
+   console.log(e)
   // console.log(e.srcElement);
 
   if (e.srcElement.className == "movie-btn") {
