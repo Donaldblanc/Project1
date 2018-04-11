@@ -1,6 +1,6 @@
 
 // Jose's CODE 
-const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fantastic Four", "Blade",
+const movies = ["Howard the Duck", "The Punisher ", "Captain America", "The Fantastic Four", "Blade",
   "X-Men",
   "Blade II",
   "Spider-Man",
@@ -274,7 +274,7 @@ function gen_character(response_imdb) {
     characters_array.splice(length, 0, temp_character_4);
     if (temp_character.indexOf('The') > -1) {
       var temp_character_3 = temp_character.split('The')
-      temp_character_3 = temp_character_3.replace(/^\s+|\s+$/gm, '');
+      // temp_character_3 = temp_character_3.replace(/^\s+|\s+$/gm, '');
       // console.log("Name without 'The' :" + temp_character_3[1]);
       characters_array.push(temp_character_3[1]);
     } else {
