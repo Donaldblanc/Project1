@@ -5,7 +5,10 @@
   <title>Marvel Comics</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <script src="assets/javascript/script.js" async></script>
+  <script src="assets/javascript/script.js" defer></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="assets/fancybox/jquery.fancybox.pack.js" async></script>
   <link href="assets/css/layout.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
@@ -58,9 +61,17 @@
       <!-- main body -->
       <div class="btmspace-80 center">
         <h3 class="nospace">How it all Began</h3>
-        <p class="nospace">Back in 2005, the idea of superheroes hanging out together on-screen was as absurd as the thought of someone making another Star Wars trilogy. While superheroes often team up on the pages of comic books, movie licensing deals limited specific characters to specific studios for specific franchises. On the big screen, Superman stayed in Metropolis, Batman in Gotham City, and the X-Men and Spider-Man lived in two separate versions of New York produced, respectively, by 20th Century Fox and Columbia Pictures.
-
-          But around that time Marvel Comics was growing dissatisfied with the way its characters were being presented on-screen in critical flops like 2003’s Daredevil and 2005’s Fantastic Four. So Marvel Studios President Kevin Feige—who handled TV and film rights for the comic book company—came up with a plan: Marvel would simply start making its own films with the characters it still owned the screen rights to—a handful of relatively unknown heroes who made up a famed comic book team called The Avengers. The studio would also replicate a comic book concept introduced by Marvel creators Jack Kirby, Steve Ditko, and Stan Lee back in the 1960s: These movies would all share one continuity, now known as the “Marvel Cinematic Universe”. </p>
+        <p class="nospace">Back in 2005, the idea of superheroes hanging out together on-screen was as absurd as the thought of someone making
+          another Star Wars trilogy. While superheroes often team up on the pages of comic books, movie licensing deals limited
+          specific characters to specific studios for specific franchises. On the big screen, Superman stayed in Metropolis,
+          Batman in Gotham City, and the X-Men and Spider-Man lived in two separate versions of New York produced, respectively,
+          by 20th Century Fox and Columbia Pictures. But around that time Marvel Comics was growing dissatisfied with the
+          way its characters were being presented on-screen in critical flops like 2003’s Daredevil and 2005’s Fantastic
+          Four. So Marvel Studios President Kevin Feige—who handled TV and film rights for the comic book company—came up
+          with a plan: Marvel would simply start making its own films with the characters it still owned the screen rights
+          to—a handful of relatively unknown heroes who made up a famed comic book team called The Avengers. The studio would
+          also replicate a comic book concept introduced by Marvel creators Jack Kirby, Steve Ditko, and Stan Lee back in
+          the 1960s: These movies would all share one continuity, now known as the “Marvel Cinematic Universe”. </p>
       </div>
       <!-- <ul class="nospace group services">
         <li class="one_third first active">
@@ -182,24 +193,39 @@
 <div id="copyright" class="hoc clear">
 <div class="form-group">
     <label for="char-name">Hero Name:</label>
-    <input id="char-name" type="text" class="form-control" >
+    <input id="char-name" type="text" class="form-control">
 
     <button type="submit" class="btn btn-default" id="run-search">
-        <i class="fa fa-search"></i> Search</button>
+      <i class="fa fa-search"></i> Search</button>
 
-        <button type="submit" class="btn btn-default" id="comic-search">
-            <i class="fa fa-search"></i> get Comics</button>
+    <button type="submit" class="btn btn-default" id="comic-search">
+      <i class="fa fa-search"></i> get Comics</button>
 
-</div>
-</div>
-</div>
+  </div>
+
   <hr>
-  <div id = "characters"> </div>
- 
+  <div id="characters"> </div>
+
+  <script type="text/javascript">
+    $(".fancybox").fancybox({
+      maxWidth: 800,
+      maxHeight: 600,
+      fitToView: true,
+      width: '70%',
+      height: '70%',
+      autoSize: false,
+      closeBtn: false,
+      closeClick: false,
+      openEffect: 'elastic',
+      closeEffect: 'elastic',
+    });
+  </script>
   <!-- JAVASCRIPTS -->
   <script src="assets/javascript/jquery.min.js"></script>
   <script src="assets/javascript/jquery.backtotop.js"></script>
   <script src="assets/javascript/jquery.mobilemenu.js"></script>
   <script src="assets/javascript/jquery.flexslider-min.js"></script>
+
 </body>
+
 </html>
