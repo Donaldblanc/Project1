@@ -187,6 +187,8 @@ td{border-width:0 1px;}
 /* Colours */
 body{color:#A6A6A6; background-color:#26272B;}
 a{color:#C5A059;}
+a.fancybox{color:rgb(55, 160, 29);}
+a.fancybox:hover{color:rgb(32, 98, 173);}
 a:active, a:focus{background:transparent;}/* IE10 + 11 Bugfix - prevents grey background */
 hr, .borderedbox{border-color:#D7D7D7;}
 label span{color:#FF0000; background-color:inherit;}
@@ -255,7 +257,7 @@ table a, #comments a{background-color:inherit;}
 
 #infinite-comiclist {
 	/* We need to limit the height and show a scrollbar */
-	width: 1000px;
+	width: auto;
 	height: 300px;
 	overflow: auto;
 	/* Optional, only to check that it works with margin/padding */
@@ -269,12 +271,9 @@ table a, #comments a{background-color:inherit;}
 	padding: 10px;
 	list-style-type: none;
   }
-  li:hover {
-	background: #ccc;
-  }
   #infinite-charlist {
 	/* We need to limit the height and show a scrollbar */
-	width: 1000px;
+	width: auto;
 	height: 300px;
 	overflow: auto;
 	/* Optional, only to check that it works with margin/padding */
@@ -285,7 +284,7 @@ table a, #comments a{background-color:inherit;}
 
   #theMovie-list{
 	/* We need to limit the height and show a scrollbar */
-	width: 1000px;
+	width: auto;
 	height: 1000px;
 	overflow: auto;
 	/* Optional, only to check that it works with margin/padding */
@@ -315,13 +314,14 @@ table a, #comments a{background-color:inherit;}
 	#mainav{}
 	#mainav ul{display:none;}
 	#mainav form{display:block;}
-
+    #infinite-charlist{}
 	#breadcrumb{}
 
 	.container{}
 	#comments input[type="reset"]{margin-top:10px;}
 	.pagination li{display:inline-block; margin:0 5px 5px 0;}
-
+    #theMovie-list
+    #infinite-comiclist{}
 	#footer{}
 
 	#copyright{}
@@ -341,6 +341,9 @@ table a, #comments a{background-color:inherit;}
 	#shout footer{margin-bottom:0;}
 
 	#footer{padding-bottom:50px;}
+    #infinite-charlist{}
+    #theMovie-list{}
+    #infinite-comiclist{}
 }
 
 
@@ -357,4 +360,7 @@ table a, #comments a{background-color:inherit;}
 
 	#pageintro li article{max-width:none; width:100%;}
 	#pageintro li .heading{font-size:1.6rem;}
+    #infinite-charlist{}
+    #theMovie-list{}
+    #infinite-comiclist{}
 }
