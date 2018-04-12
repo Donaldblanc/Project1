@@ -65,7 +65,6 @@ function displayMovieInfo() {
     var movie = movies[i];
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
 
-
     fetch(queryURL).then(function (response) {
       return (response.json());
     }).then(function (response) {
@@ -187,7 +186,9 @@ document.querySelector('.container').addEventListener("click", function (e) {
      console.log("Class Name :" + e.srcElement.className);
     
      console.log("passed ID " + e.srcElement.dataset.name);
-    
+     nextItem = 0;
+     getComics(e.srcElement.dataset.name)
+;    
   }// movie-btn lisenter
 
 
@@ -324,15 +325,28 @@ var getTheId = function (idname) {
 
 // builds the 
 function getCharacters(name) {
+ // console.log(name.isArray())
 
   console.log("The Value of GetCharacters " + name[0]);
   console.log("length " + name.length);
-  for(var i =0; i < name.length; i ++)
+
+  function remove_duplicates_es6(arr) {
+    let s = new Set(arr);
+    let it = s.values();
+    return Array.from(it);
+}
+
+
+cleanName = remove_duplicates_es6(name);
+console.log("The Duplicate REMOVED"+ name);
+
+
+  for(var i =0; i < cleanName.length; i ++)
   {
-    var newURL = marvURL + charSearch + name[i] + apiAuth;
-    console.log("Testing character :" + name[i]);
-    getQuery(newURL);
-    
+    var newURL = marvURL + charSearch + cleanName[i] + apiAuth;
+    console.log("Testing character :" + cleanName[i]);
+   getQuery(newURL);
+  
   }
  
 }
@@ -344,7 +358,7 @@ searchButton.onclick = function (event) {
   var charName = getTheId("#char-name").value.trim();
   if (charName) {
 
-    getCharacters(charName);
+   // getCharacters(charName);
 
   } else {
     alert("you have to enter a character");
@@ -416,7 +430,7 @@ function getComics(charId) {
 }//getComics 
 
 
-
+var firstChar =0
 function printToPage(response) {
   console.log(response.data.results[0].name);
   console.log(response.data.results[0].id);
@@ -430,22 +444,28 @@ function printToPage(response) {
   var heroID = response.data.results[0].id;
   var description = response.data.results[0].description
 
-  var comicDiv = $("<div class='character'>");
-  var h3 = $("<h3>").text("Title: " + title);
-  var p = $("<p>").text("Description: " + description);
+  // var comicDiv = $("<div class='character'>");
+  // var h3 = $("<h3>").text("Title: " + title);
+  // var p = $("<p>").text("Description: " + description);
 
-  var charImage = $("<img>");
-  comicDiv.attr("data-name", heroID);
-  charImage.attr("src", imageUrl);
+  // var charImage = $("<img>");
+  // comicDiv.attr("data-name", heroID);
+  // charImage.attr("src", imageUrl);
 
-  comicDiv.append(h3);
-  comicDiv.append(charImage);
-  comicDiv.append(p);
+  // comicDiv.append(h3);
+  // comicDiv.append(charImage);
+  // comicDiv.append(p);
 
  // $("#characters").append(comicDiv);
 
-
  var li = document.createElement('li');
+ (firstChar == 0 ) ? li.setAttribute('class','one_third first comic-btn')  :
+ (firstChar == 3 ) ?  (li.setAttribute('class','one_third first comic-btn') , firstChar = 0) : li.setAttribute('class','one_third  comic-btn') ;        
+ firstChar++
+
+
+
+ 
   li.setAttribute('class','one_third  char-btn') ;        
 
      li.setAttribute("data-name", heroID);
@@ -476,10 +496,6 @@ function printToPage(response) {
    li.appendChild(article);
    
    document.querySelector('#infinite-charlist').appendChild(li);
-
-
-
-
 }//printToPage
 
 
@@ -489,11 +505,11 @@ var listElm = document.querySelector('#infinite-comiclist');
 // Add 20 items.
 var nextItem = 0;
 //var loadMore = function () 
-
+var charId = "";
 function loadMore(char) {
-
-  let charId = "1009610";
-
+    console.log("Value of char in LoadMore: " + char)
+//  let charId = "1009610";
+   charId = char;
   let newURL = marvURL + "characters/" + charId + "/comics?limit=6&offset=" + nextItem + apiAuth;
   const kevsServer = "https://mighty-river-19291.herokuapp.com/cors";
   var data = {
@@ -515,13 +531,13 @@ function loadMore(char) {
       console.log(response);
       // console.log(Object.keys(response).length);
       console.log(response.data.results.length);
+      console.log( "Total Comics are: " +response.data.total);
       // console.log(response.data.results[0].title);
-
-      // debuggin lines printing title to console.
+      var totalComics = response.data.total;      // debuggin lines printing title to console.
       for (var i = 0; i < response.data.results.length; i++) {
         console.log(response.data.results[i].title);
       }
-var firstCom = 0;
+      var firstCom = 0;
       for (var i = 0; i < response.data.results.length; i++) {
         var item = document.createElement('li');
         var cTitle =  response.data.results[i].title;
@@ -533,8 +549,8 @@ var firstCom = 0;
         console.log("Comic Image: " + response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension);
 
         var li = document.createElement('li');
-        (firstCom == 0 ) ? li.setAttribute('class','one_third first movie-btn')  :
-        (firstCom == 3 ) ?  (li.setAttribute('class','one_third first movie-btn') , firstCom = 0) : li.setAttribute('class','one_third  movie-btn') ;        
+        (firstCom == 0 ) ? li.setAttribute('class','one_third first comic-btn')  :
+        (firstCom == 3 ) ?  (li.setAttribute('class','one_third first comic-btn') , firstCom = 0) : li.setAttribute('class','one_third  comic-btn') ;        
         firstCom++
       
         //li.setAttribute('class','one_third  comic-btn') ;        
@@ -577,6 +593,7 @@ var firstCom = 0;
 // Detect when scrolled to bottom.
 listElm.addEventListener('scroll', function () {
   if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
-    loadMore();
+    console.log("Cahr Id in Scroll: " + charId );
+    loadMore(charId);
   }
 });
