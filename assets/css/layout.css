@@ -272,7 +272,16 @@ table a, #comments a{background-color:inherit;}
   li:hover {
 	background: #ccc;
   }
-
+  #infinite-charlist {
+	/* We need to limit the height and show a scrollbar */
+	width: 1000px;
+	height: 300px;
+	overflow: auto;
+	/* Optional, only to check that it works with margin/padding */
+	margin: 30px;
+	padding: 20px;
+	border: 2px solid black;
+  }
 
   #theMovie-list{
 	/* We need to limit the height and show a scrollbar */
