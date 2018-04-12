@@ -58,7 +58,7 @@ function displayMovieInfo() {
   var end = movNum + 7;
 
   // if the end growth lager than the movie array reset it the value of the length
-  if (end>movies.length) end = movies.length;
+  if (end > movies.length) end = movies.length;
 
   for (var i = movNum; i < end; i++) {
 
@@ -108,66 +108,105 @@ function createButton(response) {
   var imgURL = response.Poster; //retrieve poster
   var image = $("<img>").attr("src", imgURL);
 
-  var play = $(' <div id="player">');
-  // play.attr("data-id", response_youtube.items[0].id.videoId);
-  movieDiv.append(play);
+  //-----------------------IGNORE ---- YOUTUBE LINK BEING PUT ON CAMERA ICON LINE 189 OF CURRENT CODE---------------//
+
+  // var play = $(' <div id="player">');
+  // // play.attr("data-id", response_youtube.items[0].id.videoId);
+  // movieDiv.append(play);
+
+  //-----------------------IGNORE ---- YOUTUBE LINK BEING PUT ON CAMERA ICON LINE 189 OF CURRENT CODE---------------//
 
   movieDiv.append(pThree);
 
- // $("#theMovie-list").append(movieDiv);
-  var movieTitle = response.Title
- 
+  // $("#theMovie-list").append(movieDiv);
 
   var li = document.createElement('li');
 
- // (firstMov == 0 )  ? li.setAttribute('class','one_third first movie-btn') :  (firstMov == 3 ) li.setAttribute('class','one_third first movie-btn'), firstMov = 0 :  li.setAttribute('class','one_third  movie-btn');
-  
-  
-   (firstMov == 0 ) ? li.setAttribute('class','one_third first movie-btn')  :
-   (firstMov == 3 ) ?  (li.setAttribute('class','one_third first movie-btn') , firstMov = 0) : li.setAttribute('class','one_third  movie-btn') ;        
-   firstMov++
+  // (firstMov == 0 )  ? li.setAttribute('class','one_third first movie-btn') :  (firstMov == 3 ) li.setAttribute('class','one_third first movie-btn'), firstMov = 0 :  li.setAttribute('class','one_third  movie-btn');
 
-      li.setAttribute("data-name", response.imdbID);
+
+  (firstMov == 0) ? li.setAttribute('class', 'one_third first movie-btn') :
+    (firstMov == 3) ? (li.setAttribute('class', 'one_third first movie-btn'), firstMov = 0) : li.setAttribute('class', 'one_third  movie-btn');
+  firstMov++
+
+  li.setAttribute("data-name", response.imdbID);
   var article = document.createElement("article");
-      article.setAttribute('class', "bgded overlay");
-      article.style.backgroundImage = "url("+  imgURL + ")";
-  var div = document.createElement ("div")
-      div.setAttribute('class', "txtwrap");
+  article.setAttribute('class', "bgded overlay");
+  article.style.backgroundImage = "url(" + imgURL + ")";
+  var div = document.createElement("div")
+  div.setAttribute('class', "txtwrap");
 
-   var iElm = document.createElement("i"); 
-       iElm.setAttribute('class', "block fa fa-4x fa-camera");
-   var h6 = document.createElement('h6');
-       h6.innerHTML = movieTitle;
-  var  p = document.createElement('p');
-       p.innerHTML = plot;
+  // //------------------fancybox element-----------------------//
+
+  // var iFra = document.createElement("a");
+  // iFra.setAttribute('class', "fancybox fancybox.iframe");
+  // iFra.setAttribute("data-name", response.Title);
+  // iFra.setAttribute('href', "https://www.youtube.com/embed/8A7bNJCjkx8");
+  // iFra.innerHTML = "Movie Trailer";
+
+  // //------------------fancybox element-----------------------//
+  var movieTitle = response.Title
+  var iElm = document.createElement("a");
+  iElm.setAttribute('class', "fancybox fancybox.iframe block fa fa-4x fa-camera");
+  
+  var h6 = document.createElement('h6');
+  h6.innerHTML = movieTitle;
+  var p = document.createElement('p');
+  p.innerHTML = plot;
   var footer = document.createElement("footer");
 
   var more = document.createElement('a');
-     // more.setAttribute('href', '');
-      more.setAttribute('class', "movie-btn")
-      more.setAttribute("data-name", response.imdbID)
-      more.innerHTML = "More &raquo;";
+  // more.setAttribute('href', '');
+  more.setAttribute('class', "movie-btn")
+  more.setAttribute("data-name", response.imdbID)
+  more.innerHTML = "More &raquo;";
 
-    div.appendChild(iElm)
-    div.appendChild(h6);
-    div.appendChild(p);
-    footer.appendChild(more);
-    article.appendChild(div);
-    article.appendChild(footer);
-    li.appendChild(article);
-    
-    document.querySelector('#theMovie-list').appendChild(li);
+  //------------------fancybox element-----------------------//
+  // div.appendChild(iFra);
+  //------------------fancybox element-----------------------//
+
+  div.appendChild(iElm);
+  div.appendChild(h6);
+  div.appendChild(p);
+  footer.appendChild(more);
+  article.appendChild(div);
+  article.appendChild(footer);
+  li.appendChild(article);
+
+  document.querySelector('#theMovie-list').appendChild(li);
+
+//-------------------addition for embeding youtube--------------------------//
+
+  var movieTitle = response.Title
+  var queryURL1 = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + movieTitle + "trailer&key=AIzaSyC8th4wDxjLmTn1fONnkSMaUaGAGTUNQRA";
+  
+  fetch(queryURL1).then(function (response_youtube) {
+    return (response_youtube.json());
+  }).then(function (response_youtube) {
+   // console.log("****THE VANILLA WAY****");
+   // console.log(response_youtube.items[0].id.videoId);
+    video_Id = response_youtube.items[0].id.videoId;
+    iElm.setAttribute('href', "http://www.youtube.com/embed/"+video_Id+"?autoplay=1");
+   // console.log(response_youtube);
+  }).catch(function (response_youtube) {
+    console.log("***** This failed *****")
+    console.log(response_youtube);
+
+  });
+
+//-------------------addition for embeding youtube--------------------------//
 
 }//createButton
 
 displayMovieInfo();
 
 // using event bubbling to provide a single listener
-document.querySelector('.container').addEventListener("click", function (e) {
-   console.log(e)
-  // console.log(e.srcElement);
+document.querySelector('.listen').addEventListener("click", function (e) {
+  console.log(e)
+   console.log(e.srcElement);
 
   if (e.srcElement.className == "movie-btn") {
+    clearElements("infinite-charlist");
     // console.log("Button ID :" + e.srcElement.id);
     // console.log("Movie Id :" + e.srcElement.dataset.name);
     // console.log("Class Name :" + e.srcElement.className);
@@ -178,8 +217,8 @@ document.querySelector('.container').addEventListener("click", function (e) {
   }// movie-btn lisenter
 
   
-  
   if (e.srcElement.className == "char-btn") {
+    clearElements("infinite-comiclist");
     console.log("Character Clicked");
      console.log("Button ID :" + e.srcElement.id);
      console.log("CharId :" + e.srcElement.dataset.name);
@@ -190,10 +229,6 @@ document.querySelector('.container').addEventListener("click", function (e) {
      getComics(e.srcElement.dataset.name)
 ;    
   }// movie-btn lisenter
-
-
-
-
 
 });// container listener
 
@@ -216,7 +251,6 @@ function character_array(movieID) {
     console.log(response_imdb);
   });
 }//character Array 
-
 
 
 function gen_character(response_imdb) {
@@ -282,7 +316,15 @@ function gen_character(response_imdb) {
       temp_character_3 = temp_character;
     }
   }
-  localStorage.setItem("Characters", JSON.stringify(characters_array));
+  var filtered_char_array = uniqBy(characters_array, JSON.stringify);
+  function uniqBy(a, key) {
+    var index = [];
+    return a.filter(function (item) {
+      var k = key(item);
+      return index.indexOf(k) >= 0 ? false : index.push(k);
+    });
+  }
+  localStorage.setItem("Characters", JSON.stringify(filtered_char_array));
   // console.log("Final array 1 length :" + char_array.length);
   // console.log("Final array 2 length :" + characters_array.length);
   // console.log("Final array :" + characters_array);
@@ -290,13 +332,17 @@ function gen_character(response_imdb) {
   getCharacters(characters_array) 
 }
 
-
-
-
-
 //***************************  DONALD SECTION ********************************************
 
+function clearElements(parent){
 
+  var myNode = document.getElementById(parent);
+while (myNode.firstChild) {
+   console.log("Removing: " + myNode.firstChild )
+    myNode.removeChild(myNode.firstChild);
+}
+
+}//clearElments
 
 
 // marvel API call 
@@ -565,7 +611,7 @@ function loadMore(char) {
         var h6 = document.createElement('h6');
             h6.innerHTML = cTitle;
        var  p = document.createElement('p');
-            p.innerHTML = "";
+            p.innerHTML = "<br>";
        var footer = document.createElement("footer");
       
        var more = document.createElement('a');
