@@ -352,7 +352,7 @@ const apiAuth = "&ts=1&apikey=0c59a3c44e014ddc1ffcdf3ff74fc90f&hash=a6c84b3cc66e
 const marvURL = "https://gateway.marvel.com/v1/public/";
 var charSearch = "characters?name=";
 var name = "spider-man";
-var charId = ""
+var charId = "";
 
 
 var queryURL = marvURL + charSearch + name + apiAuth;
@@ -397,27 +397,27 @@ console.log("The Duplicate REMOVED"+ name);
  
 }
 
-var searchButton = getTheId("#run-search");
+// var searchButton = getTheId("#run-search");
 
-searchButton.onclick = function (event) {
-  //var charName2 = document.getElementById("char-name").value;
-  var charName = getTheId("#char-name").value.trim();
-  if (charName) {
+// searchButton.onclick = function (event) {
+//   //var charName2 = document.getElementById("char-name").value;
+//   var charName = getTheId("#char-name").value.trim();
+//   if (charName) {
 
-   // getCharacters(charName);
+//    // getCharacters(charName);
 
-  } else {
-    alert("you have to enter a character");
-  }
+//   } else {
+//     alert("you have to enter a character");
+//   }
 
-};
+// };
 
-var comicButton = getTheId("#comic-search");
-comicButton.onclick = function (event) {
+// var comicButton = getTheId("#comic-search");
+// comicButton.onclick = function (event) {
 
-  console.log("The comics button");
-  getComics(charId);
-};
+//   console.log("The comics button");
+//   getComics(charId);
+// };
 
 // using the promise API native to Javascript specific the fetch API 
 function getQuery(search) {
@@ -463,8 +463,8 @@ function getQuery(search) {
 
 function getComics(charId) {
   // need to set a boolean here for if a user has chosen a new character.
-  //  let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
-  let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
+    let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
+ // let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
   console.log("The comics fired");
   console.log(charId);
   console.log(newURL);
@@ -516,7 +516,7 @@ function printToPage(response) {
 
      li.setAttribute("data-name", heroID);
  var article = document.createElement("article");
-     article.setAttribute('class', "bgded overlay");
+     article.setAttribute('class', "bgded ");
      article.style.backgroundImage = "url("+  imageUrl + ")";
  var div = document.createElement ("div")
      div.setAttribute('class', "txtwrap");
@@ -524,7 +524,7 @@ function printToPage(response) {
   var h6 = document.createElement('h6');
       h6.innerHTML = title;
  var  p = document.createElement('p');
-      p.innerHTML = description;
+      p.innerHTML = "<br>" + description + "<br><br><br>";
  var footer = document.createElement("footer");
 
  var more = document.createElement('a');
@@ -554,7 +554,7 @@ var nextItem = 0;
 var charId = "";
 function loadMore(char) {
     console.log("Value of char in LoadMore: " + char)
-//  let charId = "1009610";
+ // let charId = "1009610";
    charId = char;
   let newURL = marvURL + "characters/" + charId + "/comics?limit=6&offset=" + nextItem + apiAuth;
   const kevsServer = "https://mighty-river-19291.herokuapp.com/cors";
@@ -591,7 +591,7 @@ function loadMore(char) {
         var cId = response.data.results[i].id;
         var Cdescription = response.data.results[i].description
         item.innerText = 'Title ' + response.data.results[i].title;
-       // listElm.appendChild(item);
+       //listElm.appendChild(item);
         console.log("Comic Image: " + response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension);
 
         var li = document.createElement('li');
@@ -611,7 +611,7 @@ function loadMore(char) {
         var h6 = document.createElement('h6');
             h6.innerHTML = cTitle;
        var  p = document.createElement('p');
-            p.innerHTML = "<br>";
+            p.innerHTML = "<br> <br><br><br><br><br><br><br><br><br>";
        var footer = document.createElement("footer");
       
        var more = document.createElement('a');
@@ -625,12 +625,10 @@ function loadMore(char) {
          div.appendChild(p);
          footer.appendChild(more);
          article.appendChild(div);
-         article.appendChild(footer);
+        // article.appendChild(footer);
          li.appendChild(article);
          
          document.querySelector('#infinite-comiclist').appendChild(li);
-
-
       }
       nextItem += 7;
       console.log("The Value of nextItem :" + nextItem);
@@ -641,5 +639,6 @@ listElm.addEventListener('scroll', function () {
   if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
     console.log("Cahr Id in Scroll: " + charId );
     loadMore(charId);
+    console.log("Calliing more comics")
   }
 });
