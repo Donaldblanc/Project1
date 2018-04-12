@@ -227,7 +227,7 @@ document.querySelector('.container').addEventListener("click", function (e) {
      console.log("passed ID " + e.srcElement.dataset.name);
     
   }// movie-btn lisenter
-  
+
 });// container listener
 
 function character_array(movieID) {
@@ -327,24 +327,6 @@ function gen_character(response_imdb) {
   // console.log("Final array 2 length :" + characters_array.length);
   // console.log("Final array :" + characters_array);
 }
-
-// --------------------FANCYBOX CODE-----------------------------//
-
-// $(".fancybox").fancybox({
-//   maxWidth: 800,
-//   maxHeight: 600,
-//   fitToView: false,
-//   width: '70%',
-//   height: '70%',
-//   autoSize: false,
-//   closeClick: false,
-//   openEffect: 'elastic',
-//   closeEffect: 'elastic'
-// });
-
-// --------------------FANCYBOX CODE-----------------------------//
-
-
 
 //***************************  DONALD SECTION ********************************************
 
