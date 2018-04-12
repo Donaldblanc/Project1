@@ -109,15 +109,17 @@ function createButton(response) {
   var imgURL = response.Poster; //retrieve poster
   var image = $("<img>").attr("src", imgURL);
 
-  var play = $(' <div id="player">');
-  // play.attr("data-id", response_youtube.items[0].id.videoId);
-  movieDiv.append(play);
+  //-----------------------IGNORE ---- YOUTUBE LINK BEING PUT ON CAMERA ICON LINE 189 OF CURRENT CODE---------------//
+
+  // var play = $(' <div id="player">');
+  // // play.attr("data-id", response_youtube.items[0].id.videoId);
+  // movieDiv.append(play);
+
+  //-----------------------IGNORE ---- YOUTUBE LINK BEING PUT ON CAMERA ICON LINE 189 OF CURRENT CODE---------------//
 
   movieDiv.append(pThree);
 
   // $("#theMovie-list").append(movieDiv);
-  var movieTitle = response.Title
-
 
   var li = document.createElement('li');
 
@@ -134,17 +136,20 @@ function createButton(response) {
   article.style.backgroundImage = "url(" + imgURL + ")";
   var div = document.createElement("div")
   div.setAttribute('class', "txtwrap");
-  //------------------fancybox element-----------------------//
 
-  var iFra = document.createElement("a");
-  iFra.setAttribute('class', "fancybox dancybox.iframe");
-  iFra.setAttribute('href', "https://www.youtube.com/embed/8A7bNJCjkx8");
-  iFra.innerHTML = "Movie Trailer";
+  // //------------------fancybox element-----------------------//
 
-  //------------------fancybox element-----------------------//
-  var iElm = document.createElement("i");
-  iElm.setAttribute('class', "block fa fa-4x fa-camera fancyYoutube");
-  iElm.setAttribute('href', "http://www.youtube.com/embed/L9szn1QQfas?autoplay=1");
+  // var iFra = document.createElement("a");
+  // iFra.setAttribute('class', "fancybox fancybox.iframe");
+  // iFra.setAttribute("data-name", response.Title);
+  // iFra.setAttribute('href', "https://www.youtube.com/embed/8A7bNJCjkx8");
+  // iFra.innerHTML = "Movie Trailer";
+
+  // //------------------fancybox element-----------------------//
+
+  var iElm = document.createElement("a");
+  iElm.setAttribute('class', "fancybox fancybox.iframe block fa fa-4x fa-camera");
+  
   var h6 = document.createElement('h6');
   h6.innerHTML = movieTitle;
   var p = document.createElement('p');
@@ -158,9 +163,8 @@ function createButton(response) {
   more.innerHTML = "More &raquo;";
 
   //------------------fancybox element-----------------------//
-  div.appendChild(iFra);
+  // div.appendChild(iFra);
   //------------------fancybox element-----------------------//
-
 
   div.appendChild(iElm);
   div.appendChild(h6);
@@ -171,6 +175,28 @@ function createButton(response) {
   li.appendChild(article);
 
   document.querySelector('#theMovie-list').appendChild(li);
+
+//-------------------addition for embeding youtube--------------------------//
+  var movieTitle = response.Title
+  var queryURL1 = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + movieTitle + "trailer&key=AIzaSyC8th4wDxjLmTn1fONnkSMaUaGAGTUNQRA";
+  
+  fetch(queryURL1).then(function (response_youtube) {
+    return (response_youtube.json());
+  }).then(function (response_youtube) {
+    console.log("****THE VANILLA WAY****");
+    console.log(response_youtube.items[0].id.videoId);
+    video_Id = response_youtube.items[0].id.videoId;
+    iElm.setAttribute('href', "http://www.youtube.com/embed/"+video_Id+"?autoplay=1");
+    console.log(response_youtube);
+    // createVideo(response_youtube);
+
+  }).catch(function (response_youtube) {
+    console.log("***** This failed *****")
+    console.log(response_youtube);
+
+  });
+
+//-------------------addition for embeding youtube--------------------------//
 
 }//createButton
 
@@ -190,7 +216,19 @@ document.querySelector('.container').addEventListener("click", function (e) {
     // console.log("passed ID " + e.srcElement.dataset.name);
     char_array = [];
     character_array(movie_id);
-  }// movie-btn lisenter
+  }// movie-btn lisenter 
+
+  // -----------------------event listener for trailer fancybox---------------------//
+  
+  // else if (e.srcElement.className == "fancybox") {
+  //   console.log("clicked");
+  //   alert("clicked trailer");
+  //   let movie_id = e.srcElement.dataset.name;
+  //   playTrailer(movie_id);
+  // }
+
+  // -----------------------event listener for trailer fancybox---------------------//
+
 });// container listener
 
 function character_array(movieID) {
@@ -213,7 +251,27 @@ function character_array(movieID) {
   });
 }//character Array 
 
+// function playTrailer(movieTitle){
+//   var video_Id;
+//   var movie_Title = movieTitle;
+//   var queryURL1 = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + movie_Title + "trailer&key=AIzaSyC8th4wDxjLmTn1fONnkSMaUaGAGTUNQRA";
+  
+//   fetch(queryURL1).then(function (response_youtube) {
+//     return (response_youtube.json());
+//   }).then(function (response_youtube) {
+//     console.log("****THE VANILLA WAY****");
+//     console.log(response_youtube.items[0].id.videoId);
+//     video_Id = response_youtube.items[0].id.videoId;
+//     console.log(response_youtube);
+//     // createVideo(response_youtube);
 
+//   }).catch(function (response_youtube) {
+//     console.log("***** This failed *****")
+//     console.log(response_youtube);
+
+//   });
+
+// }
 
 function gen_character(response_imdb) {
 
