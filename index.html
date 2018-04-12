@@ -6,6 +6,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <script src="assets/javascript/script.js" async></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="assets/fancybox/jquery.fancybox.pack.js" async></script>
   <link href="assets/css/layout.css" rel="stylesheet" type="text/css" media="all">
 </head>
 
@@ -183,7 +186,22 @@
   <hr>
   <div id = "characters"> </div>
 
- 
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".fancybox").fancybox({
+            maxWidth: 800,
+            maxHeight: 600,
+            fitToView: false,
+            width: '70%',
+            height: '70%',
+            autoSize: false,
+            closeClick: false,
+            openEffect: 'elastic',
+            closeEffect: 'elastic'
+        });
+    });
+</script>
 
  
  
@@ -192,5 +210,6 @@
   <script src="assets/javascript/jquery.backtotop.js"></script>
   <script src="assets/javascript/jquery.mobilemenu.js"></script>
   <script src="assets/javascript/jquery.flexslider-min.js"></script>
+  
 </body>
 </html>
