@@ -341,7 +341,7 @@ cleanName = remove_duplicates_es6(name);
 console.log("The Duplicate REMOVED"+ name);
 
 
-  for(var i =0; i < cleanName.length; i ++)
+  for(var i =0; i < 4; i ++)
   {
     var newURL = marvURL + charSearch + cleanName[i] + apiAuth;
     console.log("Testing character :" + cleanName[i]);
