@@ -58,7 +58,7 @@ function displayMovieInfo() {
   var end = movNum + 7;
 
   // if the end growth lager than the movie array reset it the value of the length
-  if (end>movies.length) end = movies.length;
+  if (end > movies.length) end = movies.length;
 
   for (var i = movNum; i < end; i++) {
 
@@ -115,49 +115,62 @@ function createButton(response) {
 
   movieDiv.append(pThree);
 
- // $("#theMovie-list").append(movieDiv);
+  // $("#theMovie-list").append(movieDiv);
   var movieTitle = response.Title
- 
+
 
   var li = document.createElement('li');
 
- // (firstMov == 0 )  ? li.setAttribute('class','one_third first movie-btn') :  (firstMov == 3 ) li.setAttribute('class','one_third first movie-btn'), firstMov = 0 :  li.setAttribute('class','one_third  movie-btn');
-  
-  
-   (firstMov == 0 ) ? li.setAttribute('class','one_third first movie-btn')  :
-   (firstMov == 3 ) ?  (li.setAttribute('class','one_third first movie-btn') , firstMov = 0) : li.setAttribute('class','one_third  movie-btn') ;        
-   firstMov++
+  // (firstMov == 0 )  ? li.setAttribute('class','one_third first movie-btn') :  (firstMov == 3 ) li.setAttribute('class','one_third first movie-btn'), firstMov = 0 :  li.setAttribute('class','one_third  movie-btn');
 
-      li.setAttribute("data-name", response.imdbID);
+
+  (firstMov == 0) ? li.setAttribute('class', 'one_third first movie-btn') :
+    (firstMov == 3) ? (li.setAttribute('class', 'one_third first movie-btn'), firstMov = 0) : li.setAttribute('class', 'one_third  movie-btn');
+  firstMov++
+
+  li.setAttribute("data-name", response.imdbID);
   var article = document.createElement("article");
-      article.setAttribute('class', "bgded overlay");
-      article.style.backgroundImage = "url("+  imgURL + ")";
-  var div = document.createElement ("div")
-      div.setAttribute('class', "txtwrap");
+  article.setAttribute('class', "bgded overlay");
+  article.style.backgroundImage = "url(" + imgURL + ")";
+  var div = document.createElement("div")
+  div.setAttribute('class', "txtwrap");
+  //------------------fancybox element-----------------------//
 
-   var iElm = document.createElement("i"); 
-       iElm.setAttribute('class', "block fa fa-4x fa-camera");
-   var h6 = document.createElement('h6');
-       h6.innerHTML = movieTitle;
-  var  p = document.createElement('p');
-       p.innerHTML = plot;
+  var iFra = document.createElement("a");
+  iFra.setAttribute('class', "fancybox dancybox.iframe");
+  iFra.setAttribute('href', "https://www.youtube.com/embed/8A7bNJCjkx8");
+  iFra.innerHTML = "Movie Trailer";
+
+  //------------------fancybox element-----------------------//
+  var iElm = document.createElement("i");
+  iElm.setAttribute('class', "block fa fa-4x fa-camera fancyYoutube");
+  iElm.setAttribute('href', "http://www.youtube.com/embed/L9szn1QQfas?autoplay=1");
+  var h6 = document.createElement('h6');
+  h6.innerHTML = movieTitle;
+  var p = document.createElement('p');
+  p.innerHTML = plot;
   var footer = document.createElement("footer");
 
   var more = document.createElement('a');
-     // more.setAttribute('href', '');
-      more.setAttribute('class', "movie-btn")
-      more.setAttribute("data-name", response.imdbID)
-      more.innerHTML = "More &raquo;";
+  // more.setAttribute('href', '');
+  more.setAttribute('class', "movie-btn")
+  more.setAttribute("data-name", response.imdbID)
+  more.innerHTML = "More &raquo;";
 
-    div.appendChild(iElm)
-    div.appendChild(h6);
-    div.appendChild(p);
-    footer.appendChild(more);
-    article.appendChild(div);
-    article.appendChild(footer);
-    li.appendChild(article);
-    
-    document.querySelector('#theMovie-list').appendChild(li);
+  //------------------fancybox element-----------------------//
+  div.appendChild(iFra);
+  //------------------fancybox element-----------------------//
+
+
+  div.appendChild(iElm);
+  div.appendChild(h6);
+  div.appendChild(p);
+  footer.appendChild(more);
+  article.appendChild(div);
+  article.appendChild(footer);
+  li.appendChild(article);
+
+  document.querySelector('#theMovie-list').appendChild(li);
 
 }//createButton
 
@@ -165,7 +178,7 @@ displayMovieInfo();
 
 // using event bubbling to provide a single listener
 document.querySelector('.container').addEventListener("click", function (e) {
-   console.log(e)
+  console.log(e)
   // console.log(e.srcElement);
 
   if (e.srcElement.className == "movie-btn") {
@@ -281,13 +294,35 @@ function gen_character(response_imdb) {
       temp_character_3 = temp_character;
     }
   }
-  localStorage.setItem("Characters", JSON.stringify(characters_array));
+  var filtered_char_array = uniqBy(characters_array, JSON.stringify);
+  function uniqBy(a, key) {
+    var index = [];
+    return a.filter(function (item) {
+      var k = key(item);
+      return index.indexOf(k) >= 0 ? false : index.push(k);
+    });
+  }
+  localStorage.setItem("Characters", JSON.stringify(filtered_char_array));
   // console.log("Final array 1 length :" + char_array.length);
   // console.log("Final array 2 length :" + characters_array.length);
   // console.log("Final array :" + characters_array);
 }
 
+// --------------------FANCYBOX CODE-----------------------------//
 
+// $(".fancybox").fancybox({
+//   maxWidth: 800,
+//   maxHeight: 600,
+//   fitToView: false,
+//   width: '70%',
+//   height: '70%',
+//   autoSize: false,
+//   closeClick: false,
+//   openEffect: 'elastic',
+//   closeEffect: 'elastic'
+// });
+
+// --------------------FANCYBOX CODE-----------------------------//
 
 
 
