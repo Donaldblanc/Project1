@@ -173,6 +173,19 @@ function createButton(response) {
   article.appendChild(footer);
   li.appendChild(article);
 
+  $(iElm).fancybox({
+    maxWidth: 800,
+    maxHeight: 600,
+    fitToView: true,
+    width: '70%',
+    height: '70%',
+    autoSize: false,
+    closeBtn: false,
+    closeClick: false,
+    openEffect: 'elastic',
+    closeEffect: 'elastic',
+  });
+
   document.querySelector('#theMovie-list').appendChild(li);
 
 //-------------------addition for embeding youtube--------------------------//
@@ -202,6 +215,7 @@ displayMovieInfo();
 
 // ************* using event bubbling to provide a single listener *************/
 document.querySelector('.listen').addEventListener("click", function (e) {
+  e.preventDefault();
   console.log(e)
    console.log(e.srcElement);
 
@@ -229,21 +243,9 @@ document.querySelector('.listen').addEventListener("click", function (e) {
      getComics(e.srcElement.dataset.name);    
   }// movie-btn lisenter
 
-  if (e.srcElement.className.indexOf("fancybox")>=0){
-    e.preventDefault();
-    $(e.srcElement).fancybox({
-      maxWidth: 800,
-      maxHeight: 600,
-      fitToView: true,
-      width: '70%',
-      height: '70%',
-      autoSize: false,
-      closeBtn: false,
-      closeClick: false,
-      openEffect: 'elastic',
-      closeEffect: 'elastic',
-    });
-  }
+    
+    
+
 });// container listener
 
 function character_array(movieID) {
