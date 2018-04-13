@@ -524,11 +524,8 @@ function printToPage(response) {
  (firstChar == 0 ) ? li.setAttribute('class','one_third first comic-btn')  :
  (firstChar == 3 ) ?  (li.setAttribute('class','one_third first comic-btn') , firstChar = 0) : li.setAttribute('class','one_third  comic-btn') ;        
  firstChar++
-
-
-
  
-  li.setAttribute('class','one_third  char-btn') ;        
+ // li.setAttribute('class','one_third  char-btn') ;        
 
      li.setAttribute("data-name", heroID);
  var article = document.createElement("article");
