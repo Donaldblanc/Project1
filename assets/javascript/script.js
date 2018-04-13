@@ -226,10 +226,24 @@ document.querySelector('.listen').addEventListener("click", function (e) {
     
      console.log("passed ID " + e.srcElement.dataset.name);
      nextItem = 0;
-     getComics(e.srcElement.dataset.name)
-;    
+     getComics(e.srcElement.dataset.name);    
   }// movie-btn lisenter
 
+  if (e.srcElement.className.indexOf("fancybox")>=0){
+    e.preventDefault();
+    $(e.srcElement).fancybox({
+      maxWidth: 800,
+      maxHeight: 600,
+      fitToView: true,
+      width: '70%',
+      height: '70%',
+      autoSize: false,
+      closeBtn: false,
+      closeClick: false,
+      openEffect: 'elastic',
+      closeEffect: 'elastic',
+    });
+  }
 });// container listener
 
 function character_array(movieID) {
