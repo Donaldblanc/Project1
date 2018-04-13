@@ -200,7 +200,7 @@ function createButton(response) {
 
 displayMovieInfo();
 
-// using event bubbling to provide a single listener
+// ************* using event bubbling to provide a single listener *************/
 document.querySelector('.listen').addEventListener("click", function (e) {
   console.log(e)
    console.log(e.srcElement);
