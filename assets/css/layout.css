@@ -258,12 +258,13 @@ table a, #comments a{background-color:inherit;}
 #infinite-comiclist {
 	/* We need to limit the height and show a scrollbar */
 	width: auto;
-	height: 300px;
+	height: 700px;
 	overflow: auto;
 	/* Optional, only to check that it works with margin/padding */
 	margin: 30px;
 	padding: 20px;
-	border: 2px solid black;
+	border: 2px solid #c4c4c4;
+	border-radius: 25px;
   }
   
   /* Optional eye candy below: */
@@ -274,12 +275,13 @@ table a, #comments a{background-color:inherit;}
   #infinite-charlist {
 	/* We need to limit the height and show a scrollbar */
 	width: auto;
-	height: 300px;
+	height: 360px;
 	overflow: auto;
 	/* Optional, only to check that it works with margin/padding */
 	margin: 30px;
 	padding: 20px;
-	border: 2px solid black;
+	border: 2px solid #c4c4c4;
+	border-radius: 25px;
   }
 
   #theMovie-list{
@@ -290,7 +292,8 @@ table a, #comments a{background-color:inherit;}
 	/* Optional, only to check that it works with margin/padding */
 	margin: 30px;
 	padding: 20px;
-	border: 1px solid black;
+	border: 1px solid #c4c4c4;
+	border-radius: 25px;
   }
 
 
@@ -323,7 +326,6 @@ table a, #comments a{background-color:inherit;}
     #theMovie-list
     #infinite-comiclist{}
 	#footer{}
-
 	#copyright{}
 	#copyright p:first-of-type{margin-bottom:10px;}
 }
