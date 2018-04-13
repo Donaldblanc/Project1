@@ -186,7 +186,7 @@ function createButton(response) {
    // console.log("****THE VANILLA WAY****");
    // console.log(response_youtube.items[0].id.videoId);
     video_Id = response_youtube.items[0].id.videoId;
-    iElm.setAttribute('href', "http://www.youtube.com/embed/"+video_Id+"?autoplay=1");
+    iElm.setAttribute('href', "https://www.youtube.com/embed/"+video_Id+"?autoplay=1");
    // console.log(response_youtube);
   }).catch(function (response_youtube) {
     console.log("***** This failed *****")
