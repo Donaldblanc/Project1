@@ -23,6 +23,8 @@ html, body{margin:0; padding:0; font-size:14px; line-height:1.6em;}
 .bgded{background-position:top center; background-repeat:no-repeat; background-size:cover;}
 .circle{border-radius:50%; background-clip:padding-box;}
 
+
+
 .btn{display:inline-block; padding:10px 20px 12px; text-transform:uppercase; border:1px solid;}
 
 .clear, .group{display:block;}
