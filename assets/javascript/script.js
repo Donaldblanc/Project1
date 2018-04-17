@@ -53,7 +53,7 @@ var movNum = 0
 
 function displayMovieInfo() {
 
-  // if (movNum == movies.length) return;
+ // if (movNum == movies.length) return;
 
   var end = movNum + 7;
 
@@ -147,7 +147,7 @@ function createButton(response) {
   // //------------------fancybox element-----------------------//
   var movieTitle = response.Title
   var iElm = document.createElement("a");
-  iElm.setAttribute('class', "fancybox fancybox.iframe block fa fa-4x fa-video-camera");
+  iElm.setAttribute('class', "fancybox fancybox.iframe block fa fa-4x fa-camera");
 
   var h6 = document.createElement('h6');
   h6.innerHTML = movieTitle;
@@ -258,13 +258,13 @@ function character_array(movieID) {
     return (response_imdb.json());
   }).then(function (response_imdb) {
 
-    // console.log(response_imdb);
+   // console.log(response_imdb);
     var special_char;
     gen_character(response_imdb);
 
   }).catch(function (response_imdb) {
-    //  console.log("***** This failed *****")
-    // console.log(response_imdb);
+  //  console.log("***** This failed *****")
+   // console.log(response_imdb);
   });
 }//character Array 
 
@@ -354,7 +354,7 @@ function clearElements(parent) {
 
   var myNode = document.getElementById(parent);
   while (myNode.firstChild) {
-    // console.log("Removing: " + myNode.firstChild)
+   // console.log("Removing: " + myNode.firstChild)
     myNode.removeChild(myNode.firstChild);
   }
 
@@ -389,7 +389,7 @@ var getTheId = function (idname) {
 function getCharacters(name) {
   // console.log(name.isArray())
 
-  // console.log("The Value of GetCharacters " + name[0]);
+ // console.log("The Value of GetCharacters " + name[0]);
   //console.log("length " + name.length);
 
   function remove_duplicates_es6(arr) {
@@ -400,12 +400,12 @@ function getCharacters(name) {
 
 
   cleanName = remove_duplicates_es6(name);
-  // console.log("The Duplicate REMOVED" + name);
+ // console.log("The Duplicate REMOVED" + name);
 
 
   for (var i = 0; i < name.length; i++) {
     var newURL = marvURL + charSearch + cleanName[i] + apiAuth;
-    // console.log("Testing character :" + cleanName[i]);
+   // console.log("Testing character :" + cleanName[i]);
     getQuery(newURL);
 
   }
@@ -460,7 +460,7 @@ function getQuery(search) {
       // console.log(response.data.results[0].description);
       // console.log(response.data.results[0].thumbnail);
       // console.log(response.data.results[0].thumbnail.path + "."  + response.data.results[0].thumbnail.extension);
-      // console.log(response.data.results.length)
+     // console.log(response.data.results.length)
 
       if (response.data.results.length > 0) {
         charId = response.data.results[0].id;
@@ -528,12 +528,7 @@ function printToPage(response) {
   li.setAttribute("data-name", heroID);
   var article = document.createElement("article");
   article.setAttribute('class', "bgded ");
-  if (imageUrl == "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") {
-    imageUrl = "assets/images/mysterious_hero.jpg";
-    article.style.backgroundImage = "url(" + imageUrl + ")";
-  } else {
-    article.style.backgroundImage = "url(" + imageUrl + ")";
-  }
+  article.style.backgroundImage = "url(" + imageUrl + ")";
   var div = document.createElement("div")
   div.setAttribute('class', "txtwrap");
 
@@ -566,7 +561,7 @@ var nextItem = 0;
 //var loadMore = function () 
 var charId = "";
 function loadMore(char) {
-  // console.log("Value of char in LoadMore: " + char)
+ // console.log("Value of char in LoadMore: " + char)
   // let charId = "1009610";
   charId = char;
   let newURL = marvURL + "characters/" + charId + "/comics?limit=6&offset=" + nextItem + apiAuth;
