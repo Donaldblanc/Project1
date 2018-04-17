@@ -18,10 +18,11 @@
 
 #header #logo{margin:30px 0 0 0;}
 #header #logo h1{margin:0; padding:0; font-size:22px; text-transform:uppercase;}
+#header #Google_signout{padding:10px;color:#8c1a2e;font-weight: bolder;}
 
 
 /* Page Intro*/
-#pageintro{padding:150px 0;}
+#pageintro{padding:10px 0 100px 0;}
 
 #pageintro li article{display:block; max-width:75%; margin:0 auto; text-align:center;}
 #pageintro li article *{margin:0;}
@@ -33,7 +34,7 @@
 
 
 /* Content Area*/
-.container{padding:80px 0;}
+.container{padding:50px 0;background-color: #151517;}
 
 /* Content */
 .container .content{}
@@ -186,17 +187,17 @@ td{border-width:0 1px;}
 
 /* Colours */
 body{color:#A6A6A6; background-color:#26272B;}
-a{color:#C5A059;}
-a.fancybox{color:rgb(55, 160, 29);}
-a.fancybox:hover{color:rgb(32, 98, 173);}
+a{color:#184f59;}
+a.fancybox{color:white;}
+a.fancybox:hover{color:rgb(243, 85, 90);}
 a:active, a:focus{background:transparent;}/* IE10 + 11 Bugfix - prevents grey background */
 hr, .borderedbox{border-color:#D7D7D7;}
 label span{color:#FF0000; background-color:inherit;}
-input:focus, textarea:focus, *:required:focus{border-color:#C5A059;}
+input:focus, textarea:focus, *:required:focus{border-color:#184f59;}
 .overlay{color:#FFFFFF; background-color:inherit;}
 .overlay::after{color:inherit; background-color:rgba(0,0,0,.55);}
 
-.btn, .btn.inverse:hover{color:#FFFFFF; background-color:#C5A059; border-color:#C5A059;}
+.btn, .btn.inverse:hover{color:#FFFFFF; background-color:#184f59; border-color:#184f59;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:inherit;}
 
 
@@ -204,7 +205,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#C5A059;}
 .row0, .row0 a{}
 .row1{border-color:rgba(255,255,255,.1);}
 .row2{color:#A6A6A6;}
-.row3{color:#797979; background-color:#FFFFFF;}
+.row3{color:#797979; background-image:url("https://previews.123rf.com/images/phyzick/phyzick1704/phyzick170400074/77075345-grunge-particle-dust-comic-book-style-old-textured-background-halftone-distressed-isolated-retro-lay.jpg");background-repeat: cover;}
 .row4.overlay{color:#A6A6A6; background-color:#151517;}
 .row5, .row5 a{color:#A6A6A6; background-color:#26272B;}
 
@@ -214,10 +215,10 @@ input:focus, textarea:focus, *:required:focus{border-color:#C5A059;}
 
 
 /* Content Area */
-.services article{color:inherit; border-color:#C5A059;}
+.services article{color:inherit; border-color:#184f59;}
 .services article .txtwrap{border-color:transparent;}
 .services article:hover .txtwrap, .services .active article .txtwrap{color:#FFFFFF; border-color:#D7D7D7;}
-.services article footer a{color:#FFFFFF; background-color:#C5A059;}
+.services article footer a{color:#FFFFFF; background-color:#184f59;}
 
 #shout .heading{color:#FFFFFF; background:inherit;}
 
@@ -225,31 +226,35 @@ input:focus, textarea:focus, *:required:focus{border-color:#C5A059;}
 /* Footer */
 #footer .heading{color:#FFFFFF;}
 #footer input, #footer button{color:#FFFFFF; background-color:#000000;}
-#footer button{color:#C5A059;}
+#footer button{color:#184f59;}
 
 
 /* Navigation */
 #mainav li a{color:inherit;}
-#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#C5A059; background-color:inherit;}
+#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#184f59; background-color:inherit;}
 #mainav li li a, #mainav .active li a{color:#FFFFFF; background-color:rgba(0,0,0,.6); border-color:rgba(0,0,0,.6);}
-#mainav li li:hover > a, #mainav .active .active > a{color:#FFFFFF; background-color:#C5A059;}
+#mainav li li:hover > a, #mainav .active .active > a{color:#FFFFFF; background-color:#184f59;}
 #mainav form select{color:#FFFFFF; background-color:#26272B; border-color:rgba(255,255,255,.2);}
 
 #breadcrumb a{color:inherit; background-color:inherit;}
 #breadcrumb li:last-child a{}
 
 .container .sidebar nav a{color:inherit; border-color:#D7D7D7;}
-.container .sidebar nav a:hover{color:#C5A059;}
+.container .sidebar nav a:hover{color:#184f59;}
+
+.flex-container-1{display:flex;align-items: center;}
+.flex-container-1 div{margin:10px;flex-basis: 33.333%;text-align:center;}
+.flex-container-1 div img {border-radius: 50%;}
 
 .pagination a, .pagination strong{border-color:#D7D7D7;}
-.pagination .current *{color:#FFFFFF; background-color:#C5A059;}
+.pagination .current *{color:#FFFFFF; background-color:#184f59;}
 
-#backtotop{color:#FFFFFF; background-color:#C5A059;}
+#backtotop{color:#FFFFFF; background-color:#184f59;}
 
 
 /* Tables + Comments */
 table, th, td, #comments .avatar, #comments input, #comments textarea{border-color:#D7D7D7;}
-#comments input:focus, #comments textarea:focus, #comments *:required:focus{border-color:#C5A059;}
+#comments input:focus, #comments textarea:focus, #comments *:required:focus{border-color:#184f59;}
 th{color:#FFFFFF; background-color:#373737;}
 tr, #comments li, #comments input[type="submit"], #comments input[type="reset"]{color:inherit; background-color:#FBFBFB;}
 tr:nth-child(even), #comments li:nth-child(even){color:inherit; background-color:#F7F7F7;}
@@ -257,13 +262,14 @@ table a, #comments a{background-color:inherit;}
 
 #infinite-comiclist {
 	/* We need to limit the height and show a scrollbar */
-	width: 1000px;
-	height: 300px;
+	width: auto;
+	height: 700px;
 	overflow: auto;
 	/* Optional, only to check that it works with margin/padding */
 	margin: 30px;
 	padding: 20px;
-	border: 2px solid black;
+	border: 2px solid #c4c4c4;
+	border-radius: 25px;
   }
   
   /* Optional eye candy below: */
@@ -271,29 +277,28 @@ table a, #comments a{background-color:inherit;}
 	padding: 10px;
 	list-style-type: none;
   }
-  li:hover {
-	background: #ccc;
-  }
   #infinite-charlist {
 	/* We need to limit the height and show a scrollbar */
-	width: 1000px;
-	height: 300px;
+	width: auto;
+	height: 360px;
 	overflow: auto;
 	/* Optional, only to check that it works with margin/padding */
 	margin: 30px;
 	padding: 20px;
-	border: 2px solid black;
+	border: 2px solid #c4c4c4;
+	border-radius: 25px;
   }
 
   #theMovie-list{
 	/* We need to limit the height and show a scrollbar */
-	width: 1000px;
+	width: auto;
 	height: 1000px;
 	overflow: auto;
 	/* Optional, only to check that it works with margin/padding */
 	margin: 30px;
 	padding: 20px;
-	border: 1px solid black;
+	border: 1px solid #c4c4c4;
+	border-radius: 25px;
   }
 
 
@@ -317,15 +322,15 @@ table a, #comments a{background-color:inherit;}
 	#mainav{}
 	#mainav ul{display:none;}
 	#mainav form{display:block;}
-
+    #infinite-charlist{}
 	#breadcrumb{}
 
 	.container{}
 	#comments input[type="reset"]{margin-top:10px;}
 	.pagination li{display:inline-block; margin:0 5px 5px 0;}
-
+    #theMovie-list
+    #infinite-comiclist{}
 	#footer{}
-
 	#copyright{}
 	#copyright p:first-of-type{margin-bottom:10px;}
 }
@@ -343,6 +348,9 @@ table a, #comments a{background-color:inherit;}
 	#shout footer{margin-bottom:0;}
 
 	#footer{padding-bottom:50px;}
+    #infinite-charlist{}
+    #theMovie-list{}
+    #infinite-comiclist{}
 }
 
 
@@ -359,4 +367,7 @@ table a, #comments a{background-color:inherit;}
 
 	#pageintro li article{max-width:none; width:100%;}
 	#pageintro li .heading{font-size:1.6rem;}
+    #infinite-charlist{}
+    #theMovie-list{}
+    #infinite-comiclist{}
 }

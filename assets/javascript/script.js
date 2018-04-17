@@ -53,7 +53,7 @@ var movNum = 0
 
 function displayMovieInfo() {
 
-  if (movNum == movies.length) return;
+  // if (movNum == movies.length) return;
 
   var end = movNum + 7;
 
@@ -65,17 +65,16 @@ function displayMovieInfo() {
     var movie = movies[i];
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
 
-
     fetch(queryURL).then(function (response) {
       return (response.json());
     }).then(function (response) {
-      console.log("****THE VANILLA WAY****");
+      //console.log("****THE VANILLA WAY****");
       // console.log(response);
       createButton(response);
 
     }).catch(function (response) {
-      console.log("***** This failed *****")
-      console.log(response);
+      // console.log("***** This failed *****")
+      // console.log(response);
     });
   }
   movNum = end;
@@ -146,10 +145,10 @@ function createButton(response) {
   // iFra.innerHTML = "Movie Trailer";
 
   // //------------------fancybox element-----------------------//
-
+  var movieTitle = response.Title
   var iElm = document.createElement("a");
-  iElm.setAttribute('class', "fancybox fancybox.iframe block fa fa-4x fa-camera");
-  
+  iElm.setAttribute('class', "fancybox fancybox.iframe block fa fa-4x fa-video-camera");
+
   var h6 = document.createElement('h6');
   h6.innerHTML = movieTitle;
   var p = document.createElement('p');
@@ -174,39 +173,54 @@ function createButton(response) {
   article.appendChild(footer);
   li.appendChild(article);
 
+  $(iElm).fancybox({
+    maxWidth: 800,
+    maxHeight: 600,
+    fitToView: true,
+    width: '70%',
+    height: '70%',
+    autoSize: false,
+    closeBtn: false,
+    closeClick: false,
+    openEffect: 'elastic',
+    closeEffect: 'elastic',
+  });
+
   document.querySelector('#theMovie-list').appendChild(li);
 
-//-------------------addition for embeding youtube--------------------------//
+  //-------------------addition for embeding youtube--------------------------//
 
   var movieTitle = response.Title
   var queryURL1 = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + movieTitle + "trailer&key=AIzaSyC8th4wDxjLmTn1fONnkSMaUaGAGTUNQRA";
-  
+
   fetch(queryURL1).then(function (response_youtube) {
     return (response_youtube.json());
   }).then(function (response_youtube) {
-    console.log("****THE VANILLA WAY****");
-    console.log(response_youtube.items[0].id.videoId);
+    // console.log("****THE VANILLA WAY****");
+    // console.log(response_youtube.items[0].id.videoId);
     video_Id = response_youtube.items[0].id.videoId;
-    iElm.setAttribute('href', "http://www.youtube.com/embed/"+video_Id+"?autoplay=1");
-    console.log(response_youtube);
+    iElm.setAttribute('href', "https://www.youtube.com/embed/" + video_Id + "?autoplay=1");
+    // console.log(response_youtube);
   }).catch(function (response_youtube) {
-    console.log("***** This failed *****")
-    console.log(response_youtube);
+    // console.log("***** This failed *****")
+    // console.log(response_youtube);
 
   });
 
-//-------------------addition for embeding youtube--------------------------//
+  //-------------------addition for embeding youtube--------------------------//
 
 }//createButton
 
 displayMovieInfo();
 
-// using event bubbling to provide a single listener
-document.querySelector('.container').addEventListener("click", function (e) {
-  console.log(e)
+// ************* using event bubbling to provide a single listener *************/
+document.querySelector('.listen').addEventListener("click", function (e) {
+  e.preventDefault();
+  // console.log(e)
   // console.log(e.srcElement);
 
   if (e.srcElement.className == "movie-btn") {
+    clearElements("infinite-charlist");
     // console.log("Button ID :" + e.srcElement.id);
     // console.log("Movie Id :" + e.srcElement.dataset.name);
     // console.log("Class Name :" + e.srcElement.className);
@@ -216,17 +230,21 @@ document.querySelector('.container').addEventListener("click", function (e) {
     character_array(movie_id);
   }// movie-btn lisenter
 
-  
-  
+
   if (e.srcElement.className == "char-btn") {
-    console.log("Character Clicked");
-     console.log("Button ID :" + e.srcElement.id);
-     console.log("CharId :" + e.srcElement.dataset.name);
-     console.log("Class Name :" + e.srcElement.className);
-    
-     console.log("passed ID " + e.srcElement.dataset.name);
-    
+    clearElements("infinite-comiclist");
+    // console.log("Character Clicked");
+    // console.log("Button ID :" + e.srcElement.id);
+    // console.log("CharId :" + e.srcElement.dataset.name);
+    // console.log("Class Name :" + e.srcElement.className);
+
+    // console.log("passed ID " + e.srcElement.dataset.name);
+    nextItem = 0;
+    getComics(e.srcElement.dataset.name);
   }// movie-btn lisenter
+
+
+
 
 });// container listener
 
@@ -240,13 +258,13 @@ function character_array(movieID) {
     return (response_imdb.json());
   }).then(function (response_imdb) {
 
-    console.log(response_imdb);
+    // console.log(response_imdb);
     var special_char;
     gen_character(response_imdb);
 
   }).catch(function (response_imdb) {
-    console.log("***** This failed *****")
-    console.log(response_imdb);
+    //  console.log("***** This failed *****")
+    // console.log(response_imdb);
   });
 }//character Array 
 
@@ -326,11 +344,21 @@ function gen_character(response_imdb) {
   // console.log("Final array 1 length :" + char_array.length);
   // console.log("Final array 2 length :" + characters_array.length);
   // console.log("Final array :" + characters_array);
+
+  getCharacters(characters_array)
 }
 
 //***************************  DONALD SECTION ********************************************
 
+function clearElements(parent) {
 
+  var myNode = document.getElementById(parent);
+  while (myNode.firstChild) {
+    // console.log("Removing: " + myNode.firstChild)
+    myNode.removeChild(myNode.firstChild);
+  }
+
+}//clearElments
 
 
 // marvel API call 
@@ -340,14 +368,14 @@ const apiAuth = "&ts=1&apikey=0c59a3c44e014ddc1ffcdf3ff74fc90f&hash=a6c84b3cc66e
 const marvURL = "https://gateway.marvel.com/v1/public/";
 var charSearch = "characters?name=";
 var name = "spider-man";
-var charId = ""
+var charId = "";
 
 
 var queryURL = marvURL + charSearch + name + apiAuth;
 
 // variable declaration
 
-console.log(queryURL);
+//console.log(queryURL);
 
 //var test = " https://gateway.marvel.com/v1/public/characters?name=spider-man&ts=1&apikey=0c59a3c44e014ddc1ffcdf3ff74fc90f&hash=a6c84b3cc66e3a92494635469be8bd74";
 
@@ -359,31 +387,52 @@ var getTheId = function (idname) {
 
 // builds the 
 function getCharacters(name) {
+  // console.log(name.isArray())
 
-  console.log(name);
-  var newURL = marvURL + charSearch + name + apiAuth;
-  getQuery(newURL);
-}
+  // console.log("The Value of GetCharacters " + name[0]);
+  //console.log("length " + name.length);
 
-var searchButton = getTheId("#run-search");
-
-searchButton.onclick = function (event) {
-  //var charName2 = document.getElementById("char-name").value;
-  var charName = getTheId("#char-name").value.trim();
-  if (charName) {
-    getCharacters(charName);
-  } else {
-    alert("you have to enter a character");
+  function remove_duplicates_es6(arr) {
+    let s = new Set(arr);
+    let it = s.values();
+    return Array.from(it);
   }
 
-};
 
-var comicButton = getTheId("#comic-search");
-comicButton.onclick = function (event) {
+  cleanName = remove_duplicates_es6(name);
+  // console.log("The Duplicate REMOVED" + name);
 
-  console.log("The comics button");
-  getComics(charId);
-};
+
+  for (var i = 0; i < name.length; i++) {
+    var newURL = marvURL + charSearch + cleanName[i] + apiAuth;
+    // console.log("Testing character :" + cleanName[i]);
+    getQuery(newURL);
+
+  }
+
+}
+
+// var searchButton = getTheId("#run-search");
+
+// searchButton.onclick = function (event) {
+//   //var charName2 = document.getElementById("char-name").value;
+//   var charName = getTheId("#char-name").value.trim();
+//   if (charName) {
+
+//    // getCharacters(charName);
+
+//   } else {
+//     alert("you have to enter a character");
+//   }
+
+// };
+
+// var comicButton = getTheId("#comic-search");
+// comicButton.onclick = function (event) {
+
+//   console.log("The comics button");
+//   getComics(charId);
+// };
 
 // using the promise API native to Javascript specific the fetch API 
 function getQuery(search) {
@@ -404,18 +453,24 @@ function getQuery(search) {
   }).then(response => response.json())
     .catch(error => console.error('Error:', error))
     .then(function (response) {
-      console.log("****THE Vanilla WAY IS THE BEST WAY ;) !!!****");
-      console.log(response);
-      // console.log(response.data.results[0].name);
+      // console.log("****THE Vanilla WAY IS THE BEST WAY ;) !!!****");
+      // console.log(response);
+      // // console.log(response.data.results[0].name);
       // console.log(response.data.results[0].id);
       // console.log(response.data.results[0].description);
       // console.log(response.data.results[0].thumbnail);
       // console.log(response.data.results[0].thumbnail.path + "."  + response.data.results[0].thumbnail.extension);
+      // console.log(response.data.results.length)
 
-      charId = response.data.results[0].id;
+      if (response.data.results.length > 0) {
+        charId = response.data.results[0].id;
+        printToPage(response);
+        //console.log("We found a character");
+      } else {
+        //console.log("Sorry no results for this character");
+      }
 
-      printToPage(response);
-      return response;
+
     });
 
 }//getQuery
@@ -423,11 +478,11 @@ function getQuery(search) {
 
 function getComics(charId) {
   // need to set a boolean here for if a user has chosen a new character.
-  //  let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
   let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
-  console.log("The comics fired");
-  console.log(charId);
-  console.log(newURL);
+  // let newURL = marvURL + "characters/" + charId + "/comics?limit=100&offset=100" + apiAuth;
+  // console.log("The comics fired");
+  // console.log(charId);
+  // console.log(newURL);
   loadMore(charId);
 
 
@@ -436,76 +491,70 @@ function getComics(charId) {
 }//getComics 
 
 
-
+var firstChar = 0;
 function printToPage(response) {
-  console.log(response.data.results[0].name);
-  console.log(response.data.results[0].id);
-  console.log(response.data.results[0].description);
-  console.log(response.data.results[0].thumbnail);
-  console.log(response.data.results[0].thumbnail.path + "." + response.data.results[0].thumbnail.extension);
-
+  // console.log(response.data.results[0].name);
+  // console.log(response.data.results[0].id);
+  // console.log(response.data.results[0].description);
+  // console.log(response.data.results[0].thumbnail);
+  // console.log(response.data.results[0].thumbnail.path + "." + response.data.results[0].thumbnail.extension);
 
   var title = response.data.results[0].name;
   var imageUrl = response.data.results[0].thumbnail.path + "." + response.data.results[0].thumbnail.extension;
   var heroID = response.data.results[0].id;
   var description = response.data.results[0].description
 
-  var comicDiv = $("<div class='character'>");
-  var h3 = $("<h3>").text("Title: " + title);
-  var p = $("<p>").text("Description: " + description);
+  // var comicDiv = $("<div class='character'>");
+  // var h3 = $("<h3>").text("Title: " + title);
+  // var p = $("<p>").text("Description: " + description);
 
-  var charImage = $("<img>");
-  comicDiv.attr("data-name", heroID);
-  charImage.attr("src", imageUrl);
+  // var charImage = $("<img>");
+  // comicDiv.attr("data-name", heroID);
+  // charImage.attr("src", imageUrl);
 
-  comicDiv.append(h3);
-  comicDiv.append(charImage);
-  comicDiv.append(p);
+  // comicDiv.append(h3);
+  // comicDiv.append(charImage);
+  // comicDiv.append(p);
 
- // $("#characters").append(comicDiv);
+  // $("#characters").append(comicDiv);
 
+  var li = document.createElement('li');
+  (firstChar == 0) ? li.setAttribute('class', 'one_third first comic-btn') :
+    (firstChar == 3) ? (li.setAttribute('class', 'one_third first comic-btn'), firstChar = 0) : li.setAttribute('class', 'one_third  comic-btn');
+  firstChar++
 
- var li = document.createElement('li');
-  li.setAttribute('class','one_third  char-btn') ;        
+  // li.setAttribute('class','one_third  char-btn') ;        
 
-     li.setAttribute("data-name", heroID);
- var article = document.createElement("article");
-     article.setAttribute('class', "bgded overlay");
-     article.style.backgroundImage = "url("+  imageUrl + ")";
- var div = document.createElement ("div")
-     div.setAttribute('class', "txtwrap");
+  li.setAttribute("data-name", heroID);
+  var article = document.createElement("article");
+  article.setAttribute('class', "bgded ");
+  if (imageUrl == "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") {
+    imageUrl = "assets/images/mysterious_hero.jpg";
+    article.style.backgroundImage = "url(" + imageUrl + ")";
+  } else {
+    article.style.backgroundImage = "url(" + imageUrl + ")";
+  }
+  var div = document.createElement("div")
+  div.setAttribute('class', "txtwrap");
 
   var h6 = document.createElement('h6');
-      h6.innerHTML = title;
- var  p = document.createElement('p');
-      p.innerHTML = description;
- var footer = document.createElement("footer");
+  h6.innerHTML = title;
+  var p = document.createElement('p');
+  p.innerHTML = "<br>" + description + "<br><br><br>";
+  var footer = document.createElement("footer");
 
- var more = document.createElement('a');
-    // more.setAttribute('href', '');
-     more.setAttribute('class', "char-btn")
-     more.setAttribute("data-name", heroID)
-     more.innerHTML = "More &raquo;";
-
-
-   div.appendChild(h6);
-   div.appendChild(p);
-   footer.appendChild(more);
-   article.appendChild(div);
-   article.appendChild(footer);
-   li.appendChild(article);
-   
-   document.querySelector('#infinite-charlist').appendChild(li);
-
-
-
-
-
-
-
-
-  
-
+  var more = document.createElement('a');
+  // more.setAttribute('href', '');
+  more.setAttribute('class', "char-btn")
+  more.setAttribute("data-name", heroID)
+  more.innerHTML = "More &raquo;";
+  div.appendChild(h6);
+  div.appendChild(p);
+  footer.appendChild(more);
+  article.appendChild(div);
+  article.appendChild(footer);
+  li.appendChild(article);
+  document.querySelector('#infinite-charlist').appendChild(li);
 }//printToPage
 
 
@@ -515,12 +564,12 @@ var listElm = document.querySelector('#infinite-comiclist');
 // Add 20 items.
 var nextItem = 0;
 //var loadMore = function () 
-
+var charId = "";
 function loadMore(char) {
-
-  let charId = "1009610";
-
-  let newURL = marvURL + "characters/" + charId + "/comics?limit=10&offset=" + nextItem + apiAuth;
+  // console.log("Value of char in LoadMore: " + char)
+  // let charId = "1009610";
+  charId = char;
+  let newURL = marvURL + "characters/" + charId + "/comics?limit=6&offset=" + nextItem + apiAuth;
   const kevsServer = "https://mighty-river-19291.herokuapp.com/cors";
   var data = {
     url: newURL,
@@ -537,32 +586,120 @@ function loadMore(char) {
   }).then(response => response.json())
     .catch(error => console.error('Error:', error))
     .then(function (response) {
-      console.log("****THE Load more function****");
-      console.log(response);
-      // console.log(Object.keys(response).length);
-      console.log(response.data.results.length);
-      // console.log(response.data.results[0].title);
-
-      // debuggin lines printing title to console.
+      // console.log("****THE Load more function****");
+      // console.log(response);
+      // // console.log(Object.keys(response).length);
+      // console.log(response.data.results.length);
+      // console.log( "Total Comics are: " +response.data.total);
+      // // console.log(response.data.results[0].title);
+      var totalComics = response.data.total;      // debuggin lines printing title to console.
       for (var i = 0; i < response.data.results.length; i++) {
-        console.log(response.data.results[i].title);
+        //console.log(response.data.results[i].title);
       }
-
+      var firstCom = 0;
       for (var i = 0; i < response.data.results.length; i++) {
         var item = document.createElement('li');
+        var cTitle = response.data.results[i].title;
+        var cImg = response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension;
+        var cId = response.data.results[i].id;
+        var Cdescription = response.data.results[i].description
         item.innerText = 'Title ' + response.data.results[i].title;
-        listElm.appendChild(item);
-        console.log("Comic Image: " + response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension);
+        //listElm.appendChild(item);
+        //console.log("Comic Image: " + response.data.results[i].thumbnail.path + "." + response.data.results[i].thumbnail.extension);
+
+        var li = document.createElement('li');
+        (firstCom == 0) ? li.setAttribute('class', 'one_third first comic-btn') :
+          (firstCom == 3) ? (li.setAttribute('class', 'one_third first comic-btn'), firstCom = 0) : li.setAttribute('class', 'one_third  comic-btn');
+        firstCom++
+
+        //li.setAttribute('class','one_third  comic-btn') ;        
+
+        li.setAttribute("data-name", cId);
+        var article = document.createElement("article");
+        article.setAttribute('class', "bgded ");
+        article.style.backgroundImage = "url(" + cImg + ")";
+        var div = document.createElement("div")
+        div.setAttribute('class', "txtwrap");
+
+        var h6 = document.createElement('h6');
+        h6.innerHTML = cTitle;
+        var p = document.createElement('p');
+        p.innerHTML = "<br> <br><br><br><br><br><br><br><br><br>";
+        var footer = document.createElement("footer");
+
+        var more = document.createElement('a');
+        // more.setAttribute('href', '');
+        more.setAttribute('class', "comic-btn")
+        more.setAttribute("data-name", cId)
+        more.innerHTML = "More &raquo;";
+        div.appendChild(h6);
+        div.appendChild(p);
+        footer.appendChild(more);
+        article.appendChild(div);
+        // article.appendChild(footer);
+        li.appendChild(article);
+        document.querySelector('#infinite-comiclist').appendChild(li);
       }
-      nextItem += 11;
-      console.log("The Value of nextItem :" + nextItem);
+      nextItem += 7;
+      // console.log("The Value of nextItem :" + nextItem);
     });
-
 }
-
 // Detect when scrolled to bottom.
 listElm.addEventListener('scroll', function () {
   if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
-    loadMore();
+    //   console.log("Cahr Id in Scroll: " + charId );
+    loadMore(charId);
+    //  console.log("Calliing more comics")
   }
 });
+
+
+
+var auth2;
+
+/**
+ * Initializes the Sign-In client.
+ */
+var initClient = function () {
+  gapi.load('auth2', function () {
+    /**
+     * Retrieve the singleton for the GoogleAuth library and set up the
+     * client.
+     */
+    auth2 = gapi.auth2.init({
+      client_id: '735632269136-0nnk57dsj0pfu9q8tbd5a2gqva7425sb.apps.googleusercontent.com'
+    });
+
+    // Attach the click handler to the sign-in button
+    auth2.attachClickHandler('signin-button', {}, onSuccess, onFailure);
+  });
+};
+
+/**
+ * Handle successful sign-ins.
+ */
+var onSuccess = function (user) {
+  console.log('Signed in as ' + user.getBasicProfile().getName());
+};
+
+/**
+ * Handle sign-in failures.
+ */
+var onFailure = function (error) {
+  console.log(error);
+};
+
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
