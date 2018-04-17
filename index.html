@@ -5,30 +5,46 @@
   <title>Marvel Comics</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  
- 
+
+  <meta name="google-signin-client_id" content="735632269136-0nnk57dsj0pfu9q8tbd5a2gqva7425sb.apps.googleusercontent.com">
+
   <link rel="stylesheet" href="assets/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-  
+
+  <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans" rel="stylesheet">
   <link href="assets/css/layout.css" rel="stylesheet" type="text/css" media="all">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 </head>
 
 <body id="top">
   <!-- Top Background Image Wrapper -->
-  <div class="bgded overlay" style="background-image:url('assets/images/background.jpg');">
+  <div class="bgded overlay" style="background-image:url('assets/images/Background-1.jpg');">
     <div class="wrapper row1">
       <header id="header" class="hoc clear">
         <div id="logo" class="fl_left">
           <h1>
-            <a href="index.html">marvelian Cerebros</a>
+            <a href="index.html" style="font-family:'Black Han Sans', sans-serif; letter-spacing: 1px;">
+              <span style="color:rgb(240,27,35)">marvelian </span>Cerebros</a>
+
           </h1>
         </div>
+        <a id="Google_signout" href="#" onclick="signOut();" style="float:right">Sign out</a>
+        <div class="g-signin2" data-onsuccess="onSignIn" style="float:right"></div>
+
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
+        <!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false"
+          data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+
+        <!-- <a href="#" onclick="signOut();" style = "float:right">Sign out</a> -->
       </header>
     </div>
     <div id="pageintro" class="hoc clear">
       <div class="flexslider basicslider">
         <ul class="slides">
           <li>
+            <img src='assets/images/captain america.png' style="width:20%">
             <article>
+
               <h3 class="heading">Captain America</h3>
               <footer>
                 <a class="btn" href="#">SEE THE COMIC</a>
@@ -36,6 +52,7 @@
             </article>
           </li>
           <li>
+            <img src='assets/images/hulk.png' style="width:20%">
             <article>
               <h3 class="heading">HULK</h3>
               <footer>
@@ -44,6 +61,7 @@
             </article>
           </li>
           <li>
+            <img src='assets/images/spiderman.png' style="width:20%">
             <article>
               <h3 class="heading">SPIDERMAN</h3>
               <footer>
@@ -59,8 +77,8 @@
   <div class="wrapper row3">
     <main class="hoc container clear">
       <!-- main body -->
-      <div class="btmspace-80 center">
-        <h3 class="nospace">How it all Began</h3>
+      <div class="center">
+        <h3 class=".btmspace-10">How it all Began</h3>
         <p class="nospace">Back in 2005, the idea of superheroes hanging out together on-screen was as absurd as the thought of someone making
           another Star Wars trilogy. While superheroes often team up on the pages of comic books, movie licensing deals limited
           specific characters to specific studios for specific franchises. On the big screen, Superman stayed in Metropolis,
@@ -73,137 +91,111 @@
           also replicate a comic book concept introduced by Marvel creators Jack Kirby, Steve Ditko, and Stan Lee back in
           the 1960s: These movies would all share one continuity, now known as the “Marvel Cinematic Universe”. </p>
       </div>
-      <!-- <ul class="nospace group services">
-        <li class="one_third first active">
-          <article class="bgded overlay" style="background-image:url('assets/images/captainamerica.jpg');">
-            <div class="txtwrap">
-              <i class="block fa fa-4x fa-camera"></i>
-              <h6 class="heading">Movie Name</h6>
-              <p>Some text here&hellip;</p>
-            </div>
-            <footer>
-              <a href="#">More &raquo;</a>
-            </footer>
-          </article>
-        </li>
-        <li class="one_third">
-          <article class="bgded overlay" style="background-image:url('assets/images/hulk.jpg');">
-            <div class="txtwrap">
-              <i class="block fa fa-4x fa-camera"></i>
-              <h6 class="heading">Movie Name</h6>
-              <p>Some text here&hellip;</p>
-            </div>
-            <footer>
-              <a href="#">More &raquo;</a>
-            </footer>
-          </article>
-        </li>
-        <li class="one_third ">
-          <article class="bgded overlay" style="background-image:url('assets/images/spiderman.jpg');">
-            <div class="txtwrap">
-              <i class="block fa fa-4x fa-camera"></i>
-              <h6 class="heading">Movie Name</h6>
-              <p>Some text here&hellip;</p>
-            </div>
-            <footer>
-              <a href="#">More &raquo;</a>
-            </footer>
-          </article>
-        </li>
-        <li class="one_third first">
-          <article class="bgded overlay" style="background-image:url('assets/images/ironman.jpg');">
-            <div class="txtwrap">
-              <i class="block fa fa-4x fa-camera"></i>
-              <h6 class="heading">Movie Name</h6>
-              <p>Some text here&hellip;</p>
-            </div>
-            <footer>
-              <a href="#">More &raquo;</a>
-            </footer>
-          </article>
-        </li>
-        <li class="one_third ">
-          <article class="bgded overlay" style="background-image:url('assets/images/wolverine.jpg');">
-            <div class="txtwrap">
-              <i class="block fa fa-4x fa-camera"></i>
-              <h6 class="heading">Movie Name</h6>
-              <p>Some text here&hellip;</p>
-            </div>
-            <footer>
-              <a href="#">More &raquo;</a>
-            </footer>
-          </article>
-        </li>
-        <li class="one_third">
-          <article class="bgded overlay" style="background-image:url('assets/images/captainamerica.jpg');">
-            <div class="txtwrap">
-              <i class="block fa fa-4x fa-camera"></i>
-              <h6 class="heading">Movie Name</h6>
-              <p>Some text here&hellip;</p>
-            </div>
-              
-            <footer>
-              <a href="#">More &raquo;</a>
-            </footer>
-          </article>
-        </li>
-      </ul>
-      / main body -->
-             </main>
-  </div>
-      <div class="clear"></div> 
-<div class="wrapper row3">
-    <main class="hoc container clear listen">
-        <div class="btmspace-80 center">
-          <h1>MOVIES</h1>
-            <div id= "theMovies">
-            <ul id="theMovie-list" class = "nospace group services"></ul>
-            </div>
-              <h1>characters</h1>
-            <div id= "characters"class = "nospace group services">
-            <ul id="infinite-charlist"></ul>
-            </div>
-            <h1>Comics</h1>
-            <div id= "commics" class = "nospace group services">
-            <ul id="infinite-comiclist"></ul>
-            </div>
-        </div>
+
     </main>
-</div>
-    
-    
+  </div>
+  <div class="clear"></div>
+  <div class="wrapper row3">
+    <main class="hoc container clear listen">
+      <div class="center">
+        <h1>MOVIES</h1>
+        <div id="theMovies">
+          <ul id="theMovie-list" class="nospace group services"></ul>
+        </div>
+        <h1>characters</h1>
+        <div id="characters" class="nospace group services">
+          <ul id="infinite-charlist"></ul>
+        </div>
+        <h1>Comics</h1>
+        <div id="commics" class="nospace group services">
+          <ul id="infinite-comiclist"></ul>
+        </div>
+      </div>
+    </main>
+  </div>
 
-  <div class="wrapper row5">
-    <div id="copyright" class="hoc clear">
-      <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved -
-        <a href="#">Donald Blanc Iman Eltayeb Jose Viteri</a>
-      </p>
+  <!--MDB Footer-->
+  <footer class="page-footer">
 
+
+    <hr>
+    <div class="flex-container-1">
+      <div class="p-2">
+        <p id="Authors">Donald Blanc</p>
+        <img src="assets/images/Don.jpg" class="img-circle img-thumbnail" alt="Responsive image" />
+        <p>Back-end developer</p>
+
+        <div id="mySidenav" class="sidenav">
+          <a id="stackoverflow" class="fa fa-stack-overflow  fa-3x" aria-hidden="true"></a>
+          <a id="linkedin" class="fa fa-linkedin  fa-3x" aria-hidden="true"> </a>
+          <a id="github" class="fa fa-github-alt  fa-3x" aria-hidden="true"></a>
+        </div>
+      </div>
+      <div class="p-2">
+        <p id="Authors">Iman Eltayeb</p>
+        <img src="assets/images/Iman.jpg" class="img-fluid img-thumbnail" alt="Responsive image" />
+        <p>Front-end developer</p>
+
+        <div id="mySidenav" class="sidenav">
+          <a id="stackoverflow" class="fa fa-stack-overflow  fa-3x" aria-hidden="true"></a>
+          <a id="linkedin" class="fa fa-linkedin  fa-3x" aria-hidden="true"> </a>
+          <a id="github" class="fa fa-github-alt  fa-3x" aria-hidden="true"></a>
+        </div>
+      </div>
+      <div class="p-2">
+        <p id="Authors">Jose Viteri</p>
+        <img src="assets/images/Jose.jpg" class="img-fluid img-thumbnail" alt="Responsive image" />
+        <p>Back-end developer</p>
+
+        <div id="mySidenav" class="sidenav">
+          <a id="stackoverflow" class="fa fa-stack-overflow  fa-3x" aria-hidden="true"></a>
+          <a id="linkedin" class="fa fa-linkedin  fa-3x" aria-hidden="true"> </a>
+          <a id="github" class="fa fa-github-alt  fa-3x" aria-hidden="true"></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <a id="backtotop" href="#top">
-    <i class="fa fa-chevron-up"></i>
-  </a>
-<br>
-<hr>
-<div class="wrapper row5">
-<div id="copyright" class="hoc clear">
-<!-- <div class="form-group">
-    <label for="char-name">Hero Name:</label>
-    <input id="char-name" type="text" class="form-control">
+    <hr>
+    <div class="footer-copyright">
+      © 2018 Copyright: Donald Blanc, Iman Eltayeb, Jose Viteri
+    </div>
 
-    <button type="submit" class="btn btn-default" id="run-search">
-      <i class="fa fa-search"></i> Search</button>
+  </footer>
 
-    <button type="submit" class="btn btn-default" id="comic-search">
-      <i class="fa fa-search"></i> get Comics</button>
-</div> -->
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '160283998001672',
+        cookie: true,
+        xfbml: true,
+        version: 'v2.12'
+      });
 
-  </div>
+      FB.AppEvents.logPageView();
 
+    };
 
-  
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+// <!-- 
+//     FB.getLoginStatus(function (response) {
+//       statusChangeCallback(response);
+//       console.log(response.status);
+//     }); -->
+    function checkLoginState() {
+      FB.getLoginStatus(function (response) {
+        statusChangeCallback(response);
+      });
+    }
+
+  </script>
   <!-- JAVASCRIPTS -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
   <script src="assets/javascript/jquery.min.js"></script>
   <script src="assets/javascript/jquery.backtotop.js"></script>
   <script src="assets/javascript/jquery.mobilemenu.js"></script>
