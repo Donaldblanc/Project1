@@ -528,7 +528,12 @@ function printToPage(response) {
   li.setAttribute("data-name", heroID);
   var article = document.createElement("article");
   article.setAttribute('class', "bgded ");
-  article.style.backgroundImage = "url(" + imageUrl + ")";
+  if (imageUrl == "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") {
+    imageUrl = "assets/images/mysterious_hero.jpg";
+    article.style.backgroundImage = "url(" + imageUrl + ")";
+  } else {
+    article.style.backgroundImage = "url(" + imageUrl + ")";
+  }
   var div = document.createElement("div")
   div.setAttribute('class', "txtwrap");
 
