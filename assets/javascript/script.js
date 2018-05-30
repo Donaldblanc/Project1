@@ -437,7 +437,7 @@ function getCharacters(name) {
 // using the promise API native to Javascript specific the fetch API 
 function getQuery(search) {
 
-  const kevsServer = "https://mighty-river-19291.herokuapp.com/cors";
+  const kevsServer = "https://fast-wave-76456.herokuapp.com/cors";
   var data = {
     url: search,
     key: "8b5dcaf7cdfb9c46221d492eec6560c571d6ec218b2485c54075ab7840fa77f9"
@@ -565,7 +565,7 @@ function loadMore(char) {
   // let charId = "1009610";
   charId = char;
   let newURL = marvURL + "characters/" + charId + "/comics?limit=6&offset=" + nextItem + apiAuth;
-  const kevsServer = "https://mighty-river-19291.herokuapp.com/cors";
+  const kevsServer = "https://fast-wave-76456.herokuapp.com/cors";
   var data = {
     url: newURL,
     key: "8b5dcaf7cdfb9c46221d492eec6560c571d6ec218b2485c54075ab7840fa77f9"
